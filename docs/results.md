@@ -2,6 +2,7 @@
 
 Everything below is regenerated from the artifacts in `runs/main` by
 `python -m dreamforge.report --run runs/main` (see `runs/main/report.md`).
+A curated, committed copy of the key artifacts lives in [`results/`](results/).
 
 ## Setup
 
@@ -98,49 +99,80 @@ GPU for the full sweep. It is the first item in `TODO` above any larger claim.
 
 ## W3 — fine-tuning on imagined corrections
 
-| policy | steps | closed-loop success (100 eps, paired) |
+| policy | data | closed-loop success (100 eps, paired) |
 |---|---|---|
 | base `smolvla_libero` | — | **61.0%** [51.2, 70.0] |
-| `ft_all` (all 360 imagined corrections + 50% replay) | 3000 | 57.0% [47.2, 66.3] |
-| `ft_replay` (control: replay only) | 3000 | 58.0% [48.2, 67.2] |
-| `ft_early` (managed corrections from steps ≤ 50, 120 samples) | 3000 | _pending_ |
+| `ft_all` | all 360 imagined corrections + 50% replay | 57.0% [47.2, 66.3] |
+| `ft_replay` | control: replay only, same budget | 58.0% [48.2, 67.2] |
+| `ft_early` | corrections from steps ≤ 50 only (120 samples) | **45.0%** [35.6, 54.8] |
 
-* base vs `ft_all`: +4.0pp, exact McNemar p = 0.48 (n.s.)
-* base vs `ft_replay`: +3.0pp, p = 0.65 (n.s.)
-* **`ft_all` vs `ft_replay`: −1.0pp, 12 win / 13 loss, p = 1.0**
+Paired comparisons (exact McNemar, 100 shared episodes):
 
-Fine-tuning perturbs the policy slightly (both runs lose ~3-4pp, not
-significant); the imagined corrections add **no measurable benefit** over a
-replay-only control trained with the same budget. Training-side evidence for
-the correction data:
+* base vs `ft_all`: +4.0pp, p = 0.48 (n.s.) · base vs `ft_replay`: +3.0pp, p = 0.65 (n.s.)
+* **`ft_all` vs `ft_replay`: −1.0pp, p = 1.0** — imagined data adds nothing
+* base vs `ft_early`: **+16.0pp, p = 0.0037** · `ft_early` vs `ft_replay`: **−13.0pp, p = 0.041**
+* `ft_all` vs `ft_early`: +12.0pp, p = 0.012
 
-* synthetic (correction) loss falls from 3.85 to ~0.55 over 3000 steps,
-  replay loss stays at ~0.04 — the policy *does* learn the corrections
-* but what it learns is not worth more than random equal-budget perturbations
-  (W2), which is why closed-loop success does not move.
+Training-side evidence:
+
+* synthetic (correction) loss falls 3.85 → ~0.55 over 3000 steps, replay loss
+  stays ~0.04 — the policy *does* learn the corrections
+* but concentrating the corrections where the step breakdown says they help most
+  (episode starts) makes the policy **substantially worse**.
+
+### Why targeted corrections backfire (the informative part)
+
+The step breakdown is a *test-time* statement: at a failing start state a
+16-step correction rescues the episode ~15pp more often. It is **not** a
+statement that those states are failures. Start states are the task's initial
+state, and the base policy already succeeds from them in most episodes (61% of
+all episodes). Imitating a perturbation there overwrites behaviour that is
+mostly correct — and since every episode begins at such a state, the damage is
+broad.
+
+Formally, the mining unit is the *episode*, but the training unit is the
+*state*: correcting every decision point of every failed episode includes many
+states that are not reliably failures. The dose-response is visible in the
+table: no correction data (`ft_replay` 58%) ≈ all corrections (`ft_all` 57%) >
+corrections concentrated where they "help" (`ft_early` 45%).
+
+This is the strongest evidence in the run for the paper's central claim, moved
+from selection to training: **a signal that looks useful at the decision point
+(imagined progress, +15pp rescue rate) is not useful as supervision**, because
+offline value at a state does not tell you what the policy should be taught at
+that state.
 
 Dataset filters built from the same corrections (in `runs/main`):
 `all` 360 / `gained` (WM score) / `lifted` (simulator-verified).
 
 ## Bottom line
 
-For a strong VLA on LIBERO-Spatial, neither *selecting* among imagined
-candidates (previous work) nor *training on* imagined corrections (this work)
-turns world-model imagination into actionable value:
+For a strong VLA on LIBERO-Spatial, world-model imagination does not convert
+into actionable value — neither as *selection* among candidates (previous work)
+nor as *training supervision* (this work):
 
-1. Corrections help only slightly, and **only as much as a random perturbation
-   of the same magnitude** — the model's direction is not where the value is.
-2. Any benefit concentrates at episode starts (+15pp) and vanishes late.
+1. Imagined corrections do change outcomes (+4.2pp, p = 0.032) — but **only as
+   much as a random perturbation of the same magnitude** (−1.1pp vs random,
+   p = 0.61). The model's direction is not where the value is.
+2. Improbably, corrections **hurt** when concentrated where they look most
+   useful: training on early-step corrections drops closed-loop success from
+   58% to 45% (p = 0.041). Offline value at a state does not tell you what to
+   teach at that state.
 3. Offline imagined progress is a weak predictor of real gain (corr +0.09).
-4. Fine-tuning on the corrections matches, but does not beat, a replay-only
-   control.
+4. Fine-tuning on all corrections matches, but does not beat, a replay-only
+   control (p = 1.0).
+
+The practical reading: before paying for a world model in a control loop,
+(a) measure its action response, (b) measure the paired value of its output
+against an equal-budget random perturbation, and (c) never assume a
+decision-point metric is a training signal.
 
 ## Caveats
 
-* One suite, one base policy, one fine-tuning run per condition; all claims
-  are bounded by the reported intervals, and the state-level tests are paired
-  but clustered (episode-level summary included).
+* One suite, one base policy, one training seed per condition; all claims are
+  bounded by the reported intervals. The `ft_early` drop is significant
+  (p = 0.041) but from a single seed and would benefit from replication.
 * The world model is small (3.75M params) and trained on expert frames; larger
   video world models are out of scope here.
-* The `0.5σ` trust region is a design choice; the budget sweep (W2b) exists to
-  make the sensitivity to that choice explicit.
+* The `0.5σ` trust region is a design choice; the unconstrained-budget sweep
+  that would test its sensitivity is left as future work (W2b).

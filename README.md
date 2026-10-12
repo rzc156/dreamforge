@@ -106,18 +106,21 @@ Working pipeline, run end to end on LIBERO-Spatial with SmolVLA-450M and a
 | imagined vs none / vs random | **+3.7pp (p = 0.060)** / **−1.1pp (p = 0.61)** |
 | `ft_all` (imagined corrections + replay) | 57.0% |
 | `ft_replay` (control, replay only) | 58.0% (ft_all vs ft_replay: −1.0pp, p = 1.0) |
+| `ft_early` (corrections at steps ≤ 50 only) | **45.0%** (vs control: −13.0pp, p = 0.041) |
 
-**What this says (and does not say).** In the small-correction regime the world
-model changes outcomes a little, but **no more than a random perturbation of
-the same magnitude** — its *direction* carries no measurable value — and
-fine-tuning on those corrections does not beat a replay-only control. A
-follow-up sweep with an unconstrained correction budget (`verify_big`) tests
-whether the model's direction only matters when large deviations are allowed.
+**What this says (and does not say).** World-model imagination does not
+convert into actionable value for a strong policy. Corrections change outcomes
+(+4.2pp over doing nothing, p = 0.032) but **no more than a random perturbation
+of the same magnitude** (p = 0.61), and training on them does not beat a
+replay-only control. Unexpectedly, concentrating corrections where the
+decision-point metric says they help most makes the policy **worse** (58% →
+45%, p = 0.041), because those states are not reliably failures and every
+episode starts from one. Offline value at a state is not a training signal.
 
-This is a deliberately negative/conditional result, and it is the honest
-continuation of the earlier finding that test-time *selection* has near-zero
-headroom: moving imagination from selection to training does not rescue it, at
-least not in this regime.
+This is the honest continuation of the finding that test-time *selection* has
+near-zero headroom: moving imagination from selection to training does not
+rescue it. See [`docs/results.md`](docs/results.md) for the full log, the
+mechanism, and the caveats.
 
 ## Diagnostics first
 

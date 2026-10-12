@@ -1,0 +1,810 @@
+{
+  "policy_path": "runs/main/ft_early",
+  "task": "libero_spatial",
+  "episodes": [
+    {
+      "task": "libero_spatial/0",
+      "task_id": 0,
+      "episode": 0,
+      "seed": 0,
+      "success": true,
+      "length": 79
+    },
+    {
+      "task": "libero_spatial/0",
+      "task_id": 0,
+      "episode": 1,
+      "seed": 1,
+      "success": true,
+      "length": 80
+    },
+    {
+      "task": "libero_spatial/0",
+      "task_id": 0,
+      "episode": 2,
+      "seed": 2,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/0",
+      "task_id": 0,
+      "episode": 3,
+      "seed": 3,
+      "success": true,
+      "length": 87
+    },
+    {
+      "task": "libero_spatial/0",
+      "task_id": 0,
+      "episode": 4,
+      "seed": 4,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/0",
+      "task_id": 0,
+      "episode": 5,
+      "seed": 5,
+      "success": true,
+      "length": 79
+    },
+    {
+      "task": "libero_spatial/0",
+      "task_id": 0,
+      "episode": 6,
+      "seed": 6,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/0",
+      "task_id": 0,
+      "episode": 7,
+      "seed": 7,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/0",
+      "task_id": 0,
+      "episode": 8,
+      "seed": 8,
+      "success": true,
+      "length": 76
+    },
+    {
+      "task": "libero_spatial/0",
+      "task_id": 0,
+      "episode": 9,
+      "seed": 9,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/1",
+      "task_id": 1,
+      "episode": 0,
+      "seed": 1000,
+      "success": true,
+      "length": 109
+    },
+    {
+      "task": "libero_spatial/1",
+      "task_id": 1,
+      "episode": 1,
+      "seed": 1001,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/1",
+      "task_id": 1,
+      "episode": 2,
+      "seed": 1002,
+      "success": true,
+      "length": 111
+    },
+    {
+      "task": "libero_spatial/1",
+      "task_id": 1,
+      "episode": 3,
+      "seed": 1003,
+      "success": true,
+      "length": 108
+    },
+    {
+      "task": "libero_spatial/1",
+      "task_id": 1,
+      "episode": 4,
+      "seed": 1004,
+      "success": true,
+      "length": 111
+    },
+    {
+      "task": "libero_spatial/1",
+      "task_id": 1,
+      "episode": 5,
+      "seed": 1005,
+      "success": true,
+      "length": 105
+    },
+    {
+      "task": "libero_spatial/1",
+      "task_id": 1,
+      "episode": 6,
+      "seed": 1006,
+      "success": true,
+      "length": 117
+    },
+    {
+      "task": "libero_spatial/1",
+      "task_id": 1,
+      "episode": 7,
+      "seed": 1007,
+      "success": true,
+      "length": 107
+    },
+    {
+      "task": "libero_spatial/1",
+      "task_id": 1,
+      "episode": 8,
+      "seed": 1008,
+      "success": true,
+      "length": 108
+    },
+    {
+      "task": "libero_spatial/1",
+      "task_id": 1,
+      "episode": 9,
+      "seed": 1009,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/2",
+      "task_id": 2,
+      "episode": 0,
+      "seed": 2000,
+      "success": true,
+      "length": 99
+    },
+    {
+      "task": "libero_spatial/2",
+      "task_id": 2,
+      "episode": 1,
+      "seed": 2001,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/2",
+      "task_id": 2,
+      "episode": 2,
+      "seed": 2002,
+      "success": true,
+      "length": 88
+    },
+    {
+      "task": "libero_spatial/2",
+      "task_id": 2,
+      "episode": 3,
+      "seed": 2003,
+      "success": true,
+      "length": 110
+    },
+    {
+      "task": "libero_spatial/2",
+      "task_id": 2,
+      "episode": 4,
+      "seed": 2004,
+      "success": true,
+      "length": 102
+    },
+    {
+      "task": "libero_spatial/2",
+      "task_id": 2,
+      "episode": 5,
+      "seed": 2005,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/2",
+      "task_id": 2,
+      "episode": 6,
+      "seed": 2006,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/2",
+      "task_id": 2,
+      "episode": 7,
+      "seed": 2007,
+      "success": true,
+      "length": 95
+    },
+    {
+      "task": "libero_spatial/2",
+      "task_id": 2,
+      "episode": 8,
+      "seed": 2008,
+      "success": true,
+      "length": 96
+    },
+    {
+      "task": "libero_spatial/2",
+      "task_id": 2,
+      "episode": 9,
+      "seed": 2009,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/3",
+      "task_id": 3,
+      "episode": 0,
+      "seed": 3000,
+      "success": true,
+      "length": 89
+    },
+    {
+      "task": "libero_spatial/3",
+      "task_id": 3,
+      "episode": 1,
+      "seed": 3001,
+      "success": true,
+      "length": 83
+    },
+    {
+      "task": "libero_spatial/3",
+      "task_id": 3,
+      "episode": 2,
+      "seed": 3002,
+      "success": true,
+      "length": 80
+    },
+    {
+      "task": "libero_spatial/3",
+      "task_id": 3,
+      "episode": 3,
+      "seed": 3003,
+      "success": true,
+      "length": 82
+    },
+    {
+      "task": "libero_spatial/3",
+      "task_id": 3,
+      "episode": 4,
+      "seed": 3004,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/3",
+      "task_id": 3,
+      "episode": 5,
+      "seed": 3005,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/3",
+      "task_id": 3,
+      "episode": 6,
+      "seed": 3006,
+      "success": true,
+      "length": 86
+    },
+    {
+      "task": "libero_spatial/3",
+      "task_id": 3,
+      "episode": 7,
+      "seed": 3007,
+      "success": true,
+      "length": 91
+    },
+    {
+      "task": "libero_spatial/3",
+      "task_id": 3,
+      "episode": 8,
+      "seed": 3008,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/3",
+      "task_id": 3,
+      "episode": 9,
+      "seed": 3009,
+      "success": true,
+      "length": 83
+    },
+    {
+      "task": "libero_spatial/4",
+      "task_id": 4,
+      "episode": 0,
+      "seed": 4000,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/4",
+      "task_id": 4,
+      "episode": 1,
+      "seed": 4001,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/4",
+      "task_id": 4,
+      "episode": 2,
+      "seed": 4002,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/4",
+      "task_id": 4,
+      "episode": 3,
+      "seed": 4003,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/4",
+      "task_id": 4,
+      "episode": 4,
+      "seed": 4004,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/4",
+      "task_id": 4,
+      "episode": 5,
+      "seed": 4005,
+      "success": true,
+      "length": 141
+    },
+    {
+      "task": "libero_spatial/4",
+      "task_id": 4,
+      "episode": 6,
+      "seed": 4006,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/4",
+      "task_id": 4,
+      "episode": 7,
+      "seed": 4007,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/4",
+      "task_id": 4,
+      "episode": 8,
+      "seed": 4008,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/4",
+      "task_id": 4,
+      "episode": 9,
+      "seed": 4009,
+      "success": true,
+      "length": 132
+    },
+    {
+      "task": "libero_spatial/5",
+      "task_id": 5,
+      "episode": 0,
+      "seed": 5000,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/5",
+      "task_id": 5,
+      "episode": 1,
+      "seed": 5001,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/5",
+      "task_id": 5,
+      "episode": 2,
+      "seed": 5002,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/5",
+      "task_id": 5,
+      "episode": 3,
+      "seed": 5003,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/5",
+      "task_id": 5,
+      "episode": 4,
+      "seed": 5004,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/5",
+      "task_id": 5,
+      "episode": 5,
+      "seed": 5005,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/5",
+      "task_id": 5,
+      "episode": 6,
+      "seed": 5006,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/5",
+      "task_id": 5,
+      "episode": 7,
+      "seed": 5007,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/5",
+      "task_id": 5,
+      "episode": 8,
+      "seed": 5008,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/5",
+      "task_id": 5,
+      "episode": 9,
+      "seed": 5009,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/6",
+      "task_id": 6,
+      "episode": 0,
+      "seed": 6000,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/6",
+      "task_id": 6,
+      "episode": 1,
+      "seed": 6001,
+      "success": true,
+      "length": 110
+    },
+    {
+      "task": "libero_spatial/6",
+      "task_id": 6,
+      "episode": 2,
+      "seed": 6002,
+      "success": true,
+      "length": 110
+    },
+    {
+      "task": "libero_spatial/6",
+      "task_id": 6,
+      "episode": 3,
+      "seed": 6003,
+      "success": true,
+      "length": 101
+    },
+    {
+      "task": "libero_spatial/6",
+      "task_id": 6,
+      "episode": 4,
+      "seed": 6004,
+      "success": true,
+      "length": 106
+    },
+    {
+      "task": "libero_spatial/6",
+      "task_id": 6,
+      "episode": 5,
+      "seed": 6005,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/6",
+      "task_id": 6,
+      "episode": 6,
+      "seed": 6006,
+      "success": true,
+      "length": 112
+    },
+    {
+      "task": "libero_spatial/6",
+      "task_id": 6,
+      "episode": 7,
+      "seed": 6007,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/6",
+      "task_id": 6,
+      "episode": 8,
+      "seed": 6008,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/6",
+      "task_id": 6,
+      "episode": 9,
+      "seed": 6009,
+      "success": true,
+      "length": 99
+    },
+    {
+      "task": "libero_spatial/7",
+      "task_id": 7,
+      "episode": 0,
+      "seed": 7000,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/7",
+      "task_id": 7,
+      "episode": 1,
+      "seed": 7001,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/7",
+      "task_id": 7,
+      "episode": 2,
+      "seed": 7002,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/7",
+      "task_id": 7,
+      "episode": 3,
+      "seed": 7003,
+      "success": true,
+      "length": 127
+    },
+    {
+      "task": "libero_spatial/7",
+      "task_id": 7,
+      "episode": 4,
+      "seed": 7004,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/7",
+      "task_id": 7,
+      "episode": 5,
+      "seed": 7005,
+      "success": true,
+      "length": 118
+    },
+    {
+      "task": "libero_spatial/7",
+      "task_id": 7,
+      "episode": 6,
+      "seed": 7006,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/7",
+      "task_id": 7,
+      "episode": 7,
+      "seed": 7007,
+      "success": true,
+      "length": 122
+    },
+    {
+      "task": "libero_spatial/7",
+      "task_id": 7,
+      "episode": 8,
+      "seed": 7008,
+      "success": true,
+      "length": 122
+    },
+    {
+      "task": "libero_spatial/7",
+      "task_id": 7,
+      "episode": 9,
+      "seed": 7009,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/8",
+      "task_id": 8,
+      "episode": 0,
+      "seed": 8000,
+      "success": true,
+      "length": 92
+    },
+    {
+      "task": "libero_spatial/8",
+      "task_id": 8,
+      "episode": 1,
+      "seed": 8001,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/8",
+      "task_id": 8,
+      "episode": 2,
+      "seed": 8002,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/8",
+      "task_id": 8,
+      "episode": 3,
+      "seed": 8003,
+      "success": true,
+      "length": 94
+    },
+    {
+      "task": "libero_spatial/8",
+      "task_id": 8,
+      "episode": 4,
+      "seed": 8004,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/8",
+      "task_id": 8,
+      "episode": 5,
+      "seed": 8005,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/8",
+      "task_id": 8,
+      "episode": 6,
+      "seed": 8006,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/8",
+      "task_id": 8,
+      "episode": 7,
+      "seed": 8007,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/8",
+      "task_id": 8,
+      "episode": 8,
+      "seed": 8008,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/8",
+      "task_id": 8,
+      "episode": 9,
+      "seed": 8009,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/9",
+      "task_id": 9,
+      "episode": 0,
+      "seed": 9000,
+      "success": true,
+      "length": 122
+    },
+    {
+      "task": "libero_spatial/9",
+      "task_id": 9,
+      "episode": 1,
+      "seed": 9001,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/9",
+      "task_id": 9,
+      "episode": 2,
+      "seed": 9002,
+      "success": true,
+      "length": 130
+    },
+    {
+      "task": "libero_spatial/9",
+      "task_id": 9,
+      "episode": 3,
+      "seed": 9003,
+      "success": true,
+      "length": 116
+    },
+    {
+      "task": "libero_spatial/9",
+      "task_id": 9,
+      "episode": 4,
+      "seed": 9004,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/9",
+      "task_id": 9,
+      "episode": 5,
+      "seed": 9005,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/9",
+      "task_id": 9,
+      "episode": 6,
+      "seed": 9006,
+      "success": true,
+      "length": 125
+    },
+    {
+      "task": "libero_spatial/9",
+      "task_id": 9,
+      "episode": 7,
+      "seed": 9007,
+      "success": false,
+      "length": 300
+    },
+    {
+      "task": "libero_spatial/9",
+      "task_id": 9,
+      "episode": 8,
+      "seed": 9008,
+      "success": true,
+      "length": 118
+    },
+    {
+      "task": "libero_spatial/9",
+      "task_id": 9,
+      "episode": 9,
+      "seed": 9009,
+      "success": false,
+      "length": 300
+    }
+  ],
+  "n": 100,
+  "successes": 45,
+  "success_rate": 45.0,
+  "minutes": 5.8
+}

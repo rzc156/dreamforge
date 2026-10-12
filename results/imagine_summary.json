@@ -1,0 +1,368 @@
+{
+  "wm": "aso",
+  "context": "failure",
+  "n_states": 360,
+  "episodes": [
+    {
+      "file": "libero_spatial__task00__ep002.npz",
+      "states": 6,
+      "mean_init": 0.4759054084618886,
+      "mean_best": 0.4930132180452347
+    },
+    {
+      "file": "libero_spatial__task00__ep006.npz",
+      "states": 6,
+      "mean_init": 0.4802401214838028,
+      "mean_best": 0.5007468461990356
+    },
+    {
+      "file": "libero_spatial__task00__ep008.npz",
+      "states": 6,
+      "mean_init": 0.4768374413251877,
+      "mean_best": 0.4873035748799642
+    },
+    {
+      "file": "libero_spatial__task00__ep010.npz",
+      "states": 6,
+      "mean_init": 0.4841948499282201,
+      "mean_best": 0.5041801234086355
+    },
+    {
+      "file": "libero_spatial__task00__ep012.npz",
+      "states": 6,
+      "mean_init": 0.4721655448277791,
+      "mean_best": 0.4853830933570862
+    },
+    {
+      "file": "libero_spatial__task01__ep000.npz",
+      "states": 6,
+      "mean_init": 0.4793480883042018,
+      "mean_best": 0.5137090434630712
+    },
+    {
+      "file": "libero_spatial__task01__ep001.npz",
+      "states": 6,
+      "mean_init": 0.47692757844924927,
+      "mean_best": 0.4885000189145406
+    },
+    {
+      "file": "libero_spatial__task01__ep007.npz",
+      "states": 6,
+      "mean_init": 0.48152601222197217,
+      "mean_best": 0.50169837474823
+    },
+    {
+      "file": "libero_spatial__task01__ep008.npz",
+      "states": 6,
+      "mean_init": 0.4839507242043813,
+      "mean_best": 0.49806419014930725
+    },
+    {
+      "file": "libero_spatial__task01__ep009.npz",
+      "states": 6,
+      "mean_init": 0.47978466749191284,
+      "mean_best": 0.4996400127808253
+    },
+    {
+      "file": "libero_spatial__task01__ep010.npz",
+      "states": 6,
+      "mean_init": 0.4920502305030823,
+      "mean_best": 0.5037136425574621
+    },
+    {
+      "file": "libero_spatial__task02__ep003.npz",
+      "states": 6,
+      "mean_init": 0.4793824503819148,
+      "mean_best": 0.5117156654596329
+    },
+    {
+      "file": "libero_spatial__task02__ep005.npz",
+      "states": 6,
+      "mean_init": 0.46996888021628064,
+      "mean_best": 0.48302364349365234
+    },
+    {
+      "file": "libero_spatial__task02__ep006.npz",
+      "states": 6,
+      "mean_init": 0.4815855572621028,
+      "mean_best": 0.49245333174864453
+    },
+    {
+      "file": "libero_spatial__task02__ep011.npz",
+      "states": 6,
+      "mean_init": 0.4797688275575638,
+      "mean_best": 0.5034864197174708
+    },
+    {
+      "file": "libero_spatial__task03__ep005.npz",
+      "states": 6,
+      "mean_init": 0.48334620893001556,
+      "mean_best": 0.4961926092704137
+    },
+    {
+      "file": "libero_spatial__task03__ep007.npz",
+      "states": 6,
+      "mean_init": 0.48897478481133777,
+      "mean_best": 0.5015440732240677
+    },
+    {
+      "file": "libero_spatial__task04__ep001.npz",
+      "states": 6,
+      "mean_init": 0.46426616112391156,
+      "mean_best": 0.4815470377604167
+    },
+    {
+      "file": "libero_spatial__task04__ep002.npz",
+      "states": 6,
+      "mean_init": 0.4812460094690323,
+      "mean_best": 0.5125133246183395
+    },
+    {
+      "file": "libero_spatial__task04__ep003.npz",
+      "states": 6,
+      "mean_init": 0.4719569931427638,
+      "mean_best": 0.4945174853006999
+    },
+    {
+      "file": "libero_spatial__task04__ep008.npz",
+      "states": 6,
+      "mean_init": 0.4806118756532669,
+      "mean_best": 0.5048396239678065
+    },
+    {
+      "file": "libero_spatial__task04__ep010.npz",
+      "states": 6,
+      "mean_init": 0.47621118525664013,
+      "mean_best": 0.4938242882490158
+    },
+    {
+      "file": "libero_spatial__task04__ep013.npz",
+      "states": 6,
+      "mean_init": 0.47242774566014606,
+      "mean_best": 0.497790922721227
+    },
+    {
+      "file": "libero_spatial__task04__ep014.npz",
+      "states": 6,
+      "mean_init": 0.48354898393154144,
+      "mean_best": 0.511807898680369
+    },
+    {
+      "file": "libero_spatial__task05__ep000.npz",
+      "states": 6,
+      "mean_init": 0.4954678962628047,
+      "mean_best": 0.5248404641946157
+    },
+    {
+      "file": "libero_spatial__task05__ep001.npz",
+      "states": 6,
+      "mean_init": 0.46725470821062726,
+      "mean_best": 0.49004165828227997
+    },
+    {
+      "file": "libero_spatial__task05__ep002.npz",
+      "states": 6,
+      "mean_init": 0.47040653725465137,
+      "mean_best": 0.492377832531929
+    },
+    {
+      "file": "libero_spatial__task05__ep003.npz",
+      "states": 6,
+      "mean_init": 0.48112253348032635,
+      "mean_best": 0.49963673452536267
+    },
+    {
+      "file": "libero_spatial__task05__ep004.npz",
+      "states": 6,
+      "mean_init": 0.48822060227394104,
+      "mean_best": 0.5138364185889562
+    },
+    {
+      "file": "libero_spatial__task05__ep005.npz",
+      "states": 6,
+      "mean_init": 0.4892741839090983,
+      "mean_best": 0.501679594318072
+    },
+    {
+      "file": "libero_spatial__task05__ep006.npz",
+      "states": 6,
+      "mean_init": 0.47351480027039844,
+      "mean_best": 0.48498568932215375
+    },
+    {
+      "file": "libero_spatial__task05__ep007.npz",
+      "states": 6,
+      "mean_init": 0.4908701727787654,
+      "mean_best": 0.5081921418507894
+    },
+    {
+      "file": "libero_spatial__task05__ep008.npz",
+      "states": 6,
+      "mean_init": 0.48585744202136993,
+      "mean_best": 0.5127253433068594
+    },
+    {
+      "file": "libero_spatial__task05__ep009.npz",
+      "states": 6,
+      "mean_init": 0.4815073659022649,
+      "mean_best": 0.5020586351553599
+    },
+    {
+      "file": "libero_spatial__task05__ep010.npz",
+      "states": 6,
+      "mean_init": 0.4750104397535324,
+      "mean_best": 0.4994542747735977
+    },
+    {
+      "file": "libero_spatial__task05__ep011.npz",
+      "states": 6,
+      "mean_init": 0.47588226199150085,
+      "mean_best": 0.5001676976680756
+    },
+    {
+      "file": "libero_spatial__task05__ep012.npz",
+      "states": 6,
+      "mean_init": 0.4637335886557897,
+      "mean_best": 0.4992198050022125
+    },
+    {
+      "file": "libero_spatial__task05__ep013.npz",
+      "states": 6,
+      "mean_init": 0.47338753441969555,
+      "mean_best": 0.49142541488011676
+    },
+    {
+      "file": "libero_spatial__task05__ep014.npz",
+      "states": 6,
+      "mean_init": 0.48413654665152234,
+      "mean_best": 0.5084653149048487
+    },
+    {
+      "file": "libero_spatial__task06__ep005.npz",
+      "states": 6,
+      "mean_init": 0.47995135684808093,
+      "mean_best": 0.5006349434455236
+    },
+    {
+      "file": "libero_spatial__task06__ep014.npz",
+      "states": 6,
+      "mean_init": 0.488280067841212,
+      "mean_best": 0.5134521126747131
+    },
+    {
+      "file": "libero_spatial__task07__ep000.npz",
+      "states": 6,
+      "mean_init": 0.4913194576899211,
+      "mean_best": 0.5052789847056071
+    },
+    {
+      "file": "libero_spatial__task07__ep004.npz",
+      "states": 6,
+      "mean_init": 0.47527306775252026,
+      "mean_best": 0.4801625410715739
+    },
+    {
+      "file": "libero_spatial__task07__ep009.npz",
+      "states": 6,
+      "mean_init": 0.47195038199424744,
+      "mean_best": 0.5002333472172419
+    },
+    {
+      "file": "libero_spatial__task07__ep010.npz",
+      "states": 6,
+      "mean_init": 0.4844507426023483,
+      "mean_best": 0.5061451494693756
+    },
+    {
+      "file": "libero_spatial__task07__ep013.npz",
+      "states": 6,
+      "mean_init": 0.4660213142633438,
+      "mean_best": 0.4849581867456436
+    },
+    {
+      "file": "libero_spatial__task07__ep014.npz",
+      "states": 6,
+      "mean_init": 0.49142318964004517,
+      "mean_best": 0.5078169306119283
+    },
+    {
+      "file": "libero_spatial__task08__ep001.npz",
+      "states": 6,
+      "mean_init": 0.49259338279565174,
+      "mean_best": 0.5000326285759608
+    },
+    {
+      "file": "libero_spatial__task08__ep002.npz",
+      "states": 6,
+      "mean_init": 0.4853111058473587,
+      "mean_best": 0.5127795040607452
+    },
+    {
+      "file": "libero_spatial__task08__ep004.npz",
+      "states": 6,
+      "mean_init": 0.5036084850629171,
+      "mean_best": 0.5233177095651627
+    },
+    {
+      "file": "libero_spatial__task08__ep005.npz",
+      "states": 6,
+      "mean_init": 0.4792688737312953,
+      "mean_best": 0.4909513294696808
+    },
+    {
+      "file": "libero_spatial__task08__ep006.npz",
+      "states": 6,
+      "mean_init": 0.47255195677280426,
+      "mean_best": 0.5014004955689112
+    },
+    {
+      "file": "libero_spatial__task08__ep007.npz",
+      "states": 6,
+      "mean_init": 0.4801665097475052,
+      "mean_best": 0.5030284523963928
+    },
+    {
+      "file": "libero_spatial__task08__ep010.npz",
+      "states": 6,
+      "mean_init": 0.48357043663660687,
+      "mean_best": 0.5143636961778005
+    },
+    {
+      "file": "libero_spatial__task08__ep011.npz",
+      "states": 6,
+      "mean_init": 0.4850994994242986,
+      "mean_best": 0.4994287391503652
+    },
+    {
+      "file": "libero_spatial__task09__ep001.npz",
+      "states": 6,
+      "mean_init": 0.476517120997111,
+      "mean_best": 0.5055952320496241
+    },
+    {
+      "file": "libero_spatial__task09__ep004.npz",
+      "states": 6,
+      "mean_init": 0.4926639199256897,
+      "mean_best": 0.5096705655256907
+    },
+    {
+      "file": "libero_spatial__task09__ep010.npz",
+      "states": 6,
+      "mean_init": 0.4905296266078949,
+      "mean_best": 0.5046129127343496
+    },
+    {
+      "file": "libero_spatial__task09__ep012.npz",
+      "states": 6,
+      "mean_init": 0.4766659140586853,
+      "mean_best": 0.48957501351833344
+    },
+    {
+      "file": "libero_spatial__task09__ep013.npz",
+      "states": 6,
+      "mean_init": 0.4766160200039546,
+      "mean_best": 0.5004920363426208
+    }
+  ],
+  "minutes": 0.19
+}

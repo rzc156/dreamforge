@@ -1,0 +1,1359 @@
+{
+  "task": "libero_spatial",
+  "episodes": [
+    {
+      "task": "libero_spatial/0",
+      "episode": 0,
+      "seed": 0,
+      "success": true,
+      "len": 81,
+      "decisions": 2,
+      "file": "libero_spatial__task00__ep000.npz"
+    },
+    {
+      "task": "libero_spatial/0",
+      "episode": 1,
+      "seed": 1,
+      "success": true,
+      "len": 70,
+      "decisions": 2,
+      "file": "libero_spatial__task00__ep001.npz"
+    },
+    {
+      "task": "libero_spatial/0",
+      "episode": 2,
+      "seed": 2,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task00__ep002.npz"
+    },
+    {
+      "task": "libero_spatial/0",
+      "episode": 3,
+      "seed": 3,
+      "success": true,
+      "len": 86,
+      "decisions": 2,
+      "file": "libero_spatial__task00__ep003.npz"
+    },
+    {
+      "task": "libero_spatial/0",
+      "episode": 4,
+      "seed": 4,
+      "success": true,
+      "len": 82,
+      "decisions": 2,
+      "file": "libero_spatial__task00__ep004.npz"
+    },
+    {
+      "task": "libero_spatial/0",
+      "episode": 5,
+      "seed": 5,
+      "success": true,
+      "len": 77,
+      "decisions": 2,
+      "file": "libero_spatial__task00__ep005.npz"
+    },
+    {
+      "task": "libero_spatial/0",
+      "episode": 6,
+      "seed": 6,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task00__ep006.npz"
+    },
+    {
+      "task": "libero_spatial/0",
+      "episode": 7,
+      "seed": 7,
+      "success": true,
+      "len": 85,
+      "decisions": 2,
+      "file": "libero_spatial__task00__ep007.npz"
+    },
+    {
+      "task": "libero_spatial/0",
+      "episode": 8,
+      "seed": 8,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task00__ep008.npz"
+    },
+    {
+      "task": "libero_spatial/0",
+      "episode": 9,
+      "seed": 9,
+      "success": true,
+      "len": 89,
+      "decisions": 2,
+      "file": "libero_spatial__task00__ep009.npz"
+    },
+    {
+      "task": "libero_spatial/0",
+      "episode": 10,
+      "seed": 10,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task00__ep010.npz"
+    },
+    {
+      "task": "libero_spatial/0",
+      "episode": 11,
+      "seed": 11,
+      "success": true,
+      "len": 78,
+      "decisions": 2,
+      "file": "libero_spatial__task00__ep011.npz"
+    },
+    {
+      "task": "libero_spatial/0",
+      "episode": 12,
+      "seed": 12,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task00__ep012.npz"
+    },
+    {
+      "task": "libero_spatial/0",
+      "episode": 13,
+      "seed": 13,
+      "success": true,
+      "len": 80,
+      "decisions": 2,
+      "file": "libero_spatial__task00__ep013.npz"
+    },
+    {
+      "task": "libero_spatial/0",
+      "episode": 14,
+      "seed": 14,
+      "success": true,
+      "len": 77,
+      "decisions": 2,
+      "file": "libero_spatial__task00__ep014.npz"
+    },
+    {
+      "task": "libero_spatial/1",
+      "episode": 0,
+      "seed": 1000,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task01__ep000.npz"
+    },
+    {
+      "task": "libero_spatial/1",
+      "episode": 1,
+      "seed": 1001,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task01__ep001.npz"
+    },
+    {
+      "task": "libero_spatial/1",
+      "episode": 2,
+      "seed": 1002,
+      "success": true,
+      "len": 109,
+      "decisions": 3,
+      "file": "libero_spatial__task01__ep002.npz"
+    },
+    {
+      "task": "libero_spatial/1",
+      "episode": 3,
+      "seed": 1003,
+      "success": true,
+      "len": 109,
+      "decisions": 3,
+      "file": "libero_spatial__task01__ep003.npz"
+    },
+    {
+      "task": "libero_spatial/1",
+      "episode": 4,
+      "seed": 1004,
+      "success": true,
+      "len": 113,
+      "decisions": 3,
+      "file": "libero_spatial__task01__ep004.npz"
+    },
+    {
+      "task": "libero_spatial/1",
+      "episode": 5,
+      "seed": 1005,
+      "success": true,
+      "len": 106,
+      "decisions": 3,
+      "file": "libero_spatial__task01__ep005.npz"
+    },
+    {
+      "task": "libero_spatial/1",
+      "episode": 6,
+      "seed": 1006,
+      "success": true,
+      "len": 111,
+      "decisions": 3,
+      "file": "libero_spatial__task01__ep006.npz"
+    },
+    {
+      "task": "libero_spatial/1",
+      "episode": 7,
+      "seed": 1007,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task01__ep007.npz"
+    },
+    {
+      "task": "libero_spatial/1",
+      "episode": 8,
+      "seed": 1008,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task01__ep008.npz"
+    },
+    {
+      "task": "libero_spatial/1",
+      "episode": 9,
+      "seed": 1009,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task01__ep009.npz"
+    },
+    {
+      "task": "libero_spatial/1",
+      "episode": 10,
+      "seed": 1010,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task01__ep010.npz"
+    },
+    {
+      "task": "libero_spatial/1",
+      "episode": 11,
+      "seed": 1011,
+      "success": true,
+      "len": 104,
+      "decisions": 3,
+      "file": "libero_spatial__task01__ep011.npz"
+    },
+    {
+      "task": "libero_spatial/1",
+      "episode": 12,
+      "seed": 1012,
+      "success": true,
+      "len": 107,
+      "decisions": 3,
+      "file": "libero_spatial__task01__ep012.npz"
+    },
+    {
+      "task": "libero_spatial/1",
+      "episode": 13,
+      "seed": 1013,
+      "success": true,
+      "len": 112,
+      "decisions": 3,
+      "file": "libero_spatial__task01__ep013.npz"
+    },
+    {
+      "task": "libero_spatial/1",
+      "episode": 14,
+      "seed": 1014,
+      "success": true,
+      "len": 112,
+      "decisions": 3,
+      "file": "libero_spatial__task01__ep014.npz"
+    },
+    {
+      "task": "libero_spatial/2",
+      "episode": 0,
+      "seed": 2000,
+      "success": true,
+      "len": 98,
+      "decisions": 2,
+      "file": "libero_spatial__task02__ep000.npz"
+    },
+    {
+      "task": "libero_spatial/2",
+      "episode": 1,
+      "seed": 2001,
+      "success": true,
+      "len": 108,
+      "decisions": 3,
+      "file": "libero_spatial__task02__ep001.npz"
+    },
+    {
+      "task": "libero_spatial/2",
+      "episode": 2,
+      "seed": 2002,
+      "success": true,
+      "len": 104,
+      "decisions": 3,
+      "file": "libero_spatial__task02__ep002.npz"
+    },
+    {
+      "task": "libero_spatial/2",
+      "episode": 3,
+      "seed": 2003,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task02__ep003.npz"
+    },
+    {
+      "task": "libero_spatial/2",
+      "episode": 4,
+      "seed": 2004,
+      "success": true,
+      "len": 106,
+      "decisions": 3,
+      "file": "libero_spatial__task02__ep004.npz"
+    },
+    {
+      "task": "libero_spatial/2",
+      "episode": 5,
+      "seed": 2005,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task02__ep005.npz"
+    },
+    {
+      "task": "libero_spatial/2",
+      "episode": 6,
+      "seed": 2006,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task02__ep006.npz"
+    },
+    {
+      "task": "libero_spatial/2",
+      "episode": 7,
+      "seed": 2007,
+      "success": true,
+      "len": 98,
+      "decisions": 2,
+      "file": "libero_spatial__task02__ep007.npz"
+    },
+    {
+      "task": "libero_spatial/2",
+      "episode": 8,
+      "seed": 2008,
+      "success": true,
+      "len": 111,
+      "decisions": 3,
+      "file": "libero_spatial__task02__ep008.npz"
+    },
+    {
+      "task": "libero_spatial/2",
+      "episode": 9,
+      "seed": 2009,
+      "success": true,
+      "len": 96,
+      "decisions": 2,
+      "file": "libero_spatial__task02__ep009.npz"
+    },
+    {
+      "task": "libero_spatial/2",
+      "episode": 10,
+      "seed": 2010,
+      "success": true,
+      "len": 166,
+      "decisions": 4,
+      "file": "libero_spatial__task02__ep010.npz"
+    },
+    {
+      "task": "libero_spatial/2",
+      "episode": 11,
+      "seed": 2011,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task02__ep011.npz"
+    },
+    {
+      "task": "libero_spatial/2",
+      "episode": 12,
+      "seed": 2012,
+      "success": true,
+      "len": 112,
+      "decisions": 3,
+      "file": "libero_spatial__task02__ep012.npz"
+    },
+    {
+      "task": "libero_spatial/2",
+      "episode": 13,
+      "seed": 2013,
+      "success": true,
+      "len": 98,
+      "decisions": 2,
+      "file": "libero_spatial__task02__ep013.npz"
+    },
+    {
+      "task": "libero_spatial/2",
+      "episode": 14,
+      "seed": 2014,
+      "success": true,
+      "len": 106,
+      "decisions": 3,
+      "file": "libero_spatial__task02__ep014.npz"
+    },
+    {
+      "task": "libero_spatial/3",
+      "episode": 0,
+      "seed": 3000,
+      "success": true,
+      "len": 86,
+      "decisions": 2,
+      "file": "libero_spatial__task03__ep000.npz"
+    },
+    {
+      "task": "libero_spatial/3",
+      "episode": 1,
+      "seed": 3001,
+      "success": true,
+      "len": 83,
+      "decisions": 2,
+      "file": "libero_spatial__task03__ep001.npz"
+    },
+    {
+      "task": "libero_spatial/3",
+      "episode": 2,
+      "seed": 3002,
+      "success": true,
+      "len": 81,
+      "decisions": 2,
+      "file": "libero_spatial__task03__ep002.npz"
+    },
+    {
+      "task": "libero_spatial/3",
+      "episode": 3,
+      "seed": 3003,
+      "success": true,
+      "len": 83,
+      "decisions": 2,
+      "file": "libero_spatial__task03__ep003.npz"
+    },
+    {
+      "task": "libero_spatial/3",
+      "episode": 4,
+      "seed": 3004,
+      "success": true,
+      "len": 90,
+      "decisions": 2,
+      "file": "libero_spatial__task03__ep004.npz"
+    },
+    {
+      "task": "libero_spatial/3",
+      "episode": 5,
+      "seed": 3005,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task03__ep005.npz"
+    },
+    {
+      "task": "libero_spatial/3",
+      "episode": 6,
+      "seed": 3006,
+      "success": true,
+      "len": 87,
+      "decisions": 2,
+      "file": "libero_spatial__task03__ep006.npz"
+    },
+    {
+      "task": "libero_spatial/3",
+      "episode": 7,
+      "seed": 3007,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task03__ep007.npz"
+    },
+    {
+      "task": "libero_spatial/3",
+      "episode": 8,
+      "seed": 3008,
+      "success": true,
+      "len": 88,
+      "decisions": 2,
+      "file": "libero_spatial__task03__ep008.npz"
+    },
+    {
+      "task": "libero_spatial/3",
+      "episode": 9,
+      "seed": 3009,
+      "success": true,
+      "len": 83,
+      "decisions": 2,
+      "file": "libero_spatial__task03__ep009.npz"
+    },
+    {
+      "task": "libero_spatial/3",
+      "episode": 10,
+      "seed": 3010,
+      "success": true,
+      "len": 84,
+      "decisions": 2,
+      "file": "libero_spatial__task03__ep010.npz"
+    },
+    {
+      "task": "libero_spatial/3",
+      "episode": 11,
+      "seed": 3011,
+      "success": true,
+      "len": 83,
+      "decisions": 2,
+      "file": "libero_spatial__task03__ep011.npz"
+    },
+    {
+      "task": "libero_spatial/3",
+      "episode": 12,
+      "seed": 3012,
+      "success": true,
+      "len": 86,
+      "decisions": 2,
+      "file": "libero_spatial__task03__ep012.npz"
+    },
+    {
+      "task": "libero_spatial/3",
+      "episode": 13,
+      "seed": 3013,
+      "success": true,
+      "len": 272,
+      "decisions": 6,
+      "file": "libero_spatial__task03__ep013.npz"
+    },
+    {
+      "task": "libero_spatial/3",
+      "episode": 14,
+      "seed": 3014,
+      "success": true,
+      "len": 82,
+      "decisions": 2,
+      "file": "libero_spatial__task03__ep014.npz"
+    },
+    {
+      "task": "libero_spatial/4",
+      "episode": 0,
+      "seed": 4000,
+      "success": true,
+      "len": 131,
+      "decisions": 3,
+      "file": "libero_spatial__task04__ep000.npz"
+    },
+    {
+      "task": "libero_spatial/4",
+      "episode": 1,
+      "seed": 4001,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task04__ep001.npz"
+    },
+    {
+      "task": "libero_spatial/4",
+      "episode": 2,
+      "seed": 4002,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task04__ep002.npz"
+    },
+    {
+      "task": "libero_spatial/4",
+      "episode": 3,
+      "seed": 4003,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task04__ep003.npz"
+    },
+    {
+      "task": "libero_spatial/4",
+      "episode": 4,
+      "seed": 4004,
+      "success": true,
+      "len": 135,
+      "decisions": 3,
+      "file": "libero_spatial__task04__ep004.npz"
+    },
+    {
+      "task": "libero_spatial/4",
+      "episode": 5,
+      "seed": 4005,
+      "success": true,
+      "len": 139,
+      "decisions": 3,
+      "file": "libero_spatial__task04__ep005.npz"
+    },
+    {
+      "task": "libero_spatial/4",
+      "episode": 6,
+      "seed": 4006,
+      "success": true,
+      "len": 140,
+      "decisions": 3,
+      "file": "libero_spatial__task04__ep006.npz"
+    },
+    {
+      "task": "libero_spatial/4",
+      "episode": 7,
+      "seed": 4007,
+      "success": true,
+      "len": 126,
+      "decisions": 3,
+      "file": "libero_spatial__task04__ep007.npz"
+    },
+    {
+      "task": "libero_spatial/4",
+      "episode": 8,
+      "seed": 4008,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task04__ep008.npz"
+    },
+    {
+      "task": "libero_spatial/4",
+      "episode": 9,
+      "seed": 4009,
+      "success": true,
+      "len": 130,
+      "decisions": 3,
+      "file": "libero_spatial__task04__ep009.npz"
+    },
+    {
+      "task": "libero_spatial/4",
+      "episode": 10,
+      "seed": 4010,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task04__ep010.npz"
+    },
+    {
+      "task": "libero_spatial/4",
+      "episode": 11,
+      "seed": 4011,
+      "success": true,
+      "len": 132,
+      "decisions": 3,
+      "file": "libero_spatial__task04__ep011.npz"
+    },
+    {
+      "task": "libero_spatial/4",
+      "episode": 12,
+      "seed": 4012,
+      "success": true,
+      "len": 142,
+      "decisions": 3,
+      "file": "libero_spatial__task04__ep012.npz"
+    },
+    {
+      "task": "libero_spatial/4",
+      "episode": 13,
+      "seed": 4013,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task04__ep013.npz"
+    },
+    {
+      "task": "libero_spatial/4",
+      "episode": 14,
+      "seed": 4014,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task04__ep014.npz"
+    },
+    {
+      "task": "libero_spatial/5",
+      "episode": 0,
+      "seed": 5000,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task05__ep000.npz"
+    },
+    {
+      "task": "libero_spatial/5",
+      "episode": 1,
+      "seed": 5001,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task05__ep001.npz"
+    },
+    {
+      "task": "libero_spatial/5",
+      "episode": 2,
+      "seed": 5002,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task05__ep002.npz"
+    },
+    {
+      "task": "libero_spatial/5",
+      "episode": 3,
+      "seed": 5003,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task05__ep003.npz"
+    },
+    {
+      "task": "libero_spatial/5",
+      "episode": 4,
+      "seed": 5004,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task05__ep004.npz"
+    },
+    {
+      "task": "libero_spatial/5",
+      "episode": 5,
+      "seed": 5005,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task05__ep005.npz"
+    },
+    {
+      "task": "libero_spatial/5",
+      "episode": 6,
+      "seed": 5006,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task05__ep006.npz"
+    },
+    {
+      "task": "libero_spatial/5",
+      "episode": 7,
+      "seed": 5007,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task05__ep007.npz"
+    },
+    {
+      "task": "libero_spatial/5",
+      "episode": 8,
+      "seed": 5008,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task05__ep008.npz"
+    },
+    {
+      "task": "libero_spatial/5",
+      "episode": 9,
+      "seed": 5009,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task05__ep009.npz"
+    },
+    {
+      "task": "libero_spatial/5",
+      "episode": 10,
+      "seed": 5010,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task05__ep010.npz"
+    },
+    {
+      "task": "libero_spatial/5",
+      "episode": 11,
+      "seed": 5011,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task05__ep011.npz"
+    },
+    {
+      "task": "libero_spatial/5",
+      "episode": 12,
+      "seed": 5012,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task05__ep012.npz"
+    },
+    {
+      "task": "libero_spatial/5",
+      "episode": 13,
+      "seed": 5013,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task05__ep013.npz"
+    },
+    {
+      "task": "libero_spatial/5",
+      "episode": 14,
+      "seed": 5014,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task05__ep014.npz"
+    },
+    {
+      "task": "libero_spatial/6",
+      "episode": 0,
+      "seed": 6000,
+      "success": true,
+      "len": 112,
+      "decisions": 3,
+      "file": "libero_spatial__task06__ep000.npz"
+    },
+    {
+      "task": "libero_spatial/6",
+      "episode": 1,
+      "seed": 6001,
+      "success": true,
+      "len": 106,
+      "decisions": 3,
+      "file": "libero_spatial__task06__ep001.npz"
+    },
+    {
+      "task": "libero_spatial/6",
+      "episode": 2,
+      "seed": 6002,
+      "success": true,
+      "len": 106,
+      "decisions": 3,
+      "file": "libero_spatial__task06__ep002.npz"
+    },
+    {
+      "task": "libero_spatial/6",
+      "episode": 3,
+      "seed": 6003,
+      "success": true,
+      "len": 98,
+      "decisions": 2,
+      "file": "libero_spatial__task06__ep003.npz"
+    },
+    {
+      "task": "libero_spatial/6",
+      "episode": 4,
+      "seed": 6004,
+      "success": true,
+      "len": 103,
+      "decisions": 3,
+      "file": "libero_spatial__task06__ep004.npz"
+    },
+    {
+      "task": "libero_spatial/6",
+      "episode": 5,
+      "seed": 6005,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task06__ep005.npz"
+    },
+    {
+      "task": "libero_spatial/6",
+      "episode": 6,
+      "seed": 6006,
+      "success": true,
+      "len": 112,
+      "decisions": 3,
+      "file": "libero_spatial__task06__ep006.npz"
+    },
+    {
+      "task": "libero_spatial/6",
+      "episode": 7,
+      "seed": 6007,
+      "success": true,
+      "len": 100,
+      "decisions": 2,
+      "file": "libero_spatial__task06__ep007.npz"
+    },
+    {
+      "task": "libero_spatial/6",
+      "episode": 8,
+      "seed": 6008,
+      "success": true,
+      "len": 106,
+      "decisions": 3,
+      "file": "libero_spatial__task06__ep008.npz"
+    },
+    {
+      "task": "libero_spatial/6",
+      "episode": 9,
+      "seed": 6009,
+      "success": true,
+      "len": 98,
+      "decisions": 2,
+      "file": "libero_spatial__task06__ep009.npz"
+    },
+    {
+      "task": "libero_spatial/6",
+      "episode": 10,
+      "seed": 6010,
+      "success": true,
+      "len": 111,
+      "decisions": 3,
+      "file": "libero_spatial__task06__ep010.npz"
+    },
+    {
+      "task": "libero_spatial/6",
+      "episode": 11,
+      "seed": 6011,
+      "success": true,
+      "len": 110,
+      "decisions": 3,
+      "file": "libero_spatial__task06__ep011.npz"
+    },
+    {
+      "task": "libero_spatial/6",
+      "episode": 12,
+      "seed": 6012,
+      "success": true,
+      "len": 110,
+      "decisions": 3,
+      "file": "libero_spatial__task06__ep012.npz"
+    },
+    {
+      "task": "libero_spatial/6",
+      "episode": 13,
+      "seed": 6013,
+      "success": true,
+      "len": 105,
+      "decisions": 3,
+      "file": "libero_spatial__task06__ep013.npz"
+    },
+    {
+      "task": "libero_spatial/6",
+      "episode": 14,
+      "seed": 6014,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task06__ep014.npz"
+    },
+    {
+      "task": "libero_spatial/7",
+      "episode": 0,
+      "seed": 7000,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task07__ep000.npz"
+    },
+    {
+      "task": "libero_spatial/7",
+      "episode": 1,
+      "seed": 7001,
+      "success": true,
+      "len": 123,
+      "decisions": 3,
+      "file": "libero_spatial__task07__ep001.npz"
+    },
+    {
+      "task": "libero_spatial/7",
+      "episode": 2,
+      "seed": 7002,
+      "success": true,
+      "len": 118,
+      "decisions": 3,
+      "file": "libero_spatial__task07__ep002.npz"
+    },
+    {
+      "task": "libero_spatial/7",
+      "episode": 3,
+      "seed": 7003,
+      "success": true,
+      "len": 200,
+      "decisions": 4,
+      "file": "libero_spatial__task07__ep003.npz"
+    },
+    {
+      "task": "libero_spatial/7",
+      "episode": 4,
+      "seed": 7004,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task07__ep004.npz"
+    },
+    {
+      "task": "libero_spatial/7",
+      "episode": 5,
+      "seed": 7005,
+      "success": true,
+      "len": 113,
+      "decisions": 3,
+      "file": "libero_spatial__task07__ep005.npz"
+    },
+    {
+      "task": "libero_spatial/7",
+      "episode": 6,
+      "seed": 7006,
+      "success": true,
+      "len": 124,
+      "decisions": 3,
+      "file": "libero_spatial__task07__ep006.npz"
+    },
+    {
+      "task": "libero_spatial/7",
+      "episode": 7,
+      "seed": 7007,
+      "success": true,
+      "len": 119,
+      "decisions": 3,
+      "file": "libero_spatial__task07__ep007.npz"
+    },
+    {
+      "task": "libero_spatial/7",
+      "episode": 8,
+      "seed": 7008,
+      "success": true,
+      "len": 121,
+      "decisions": 3,
+      "file": "libero_spatial__task07__ep008.npz"
+    },
+    {
+      "task": "libero_spatial/7",
+      "episode": 9,
+      "seed": 7009,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task07__ep009.npz"
+    },
+    {
+      "task": "libero_spatial/7",
+      "episode": 10,
+      "seed": 7010,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task07__ep010.npz"
+    },
+    {
+      "task": "libero_spatial/7",
+      "episode": 11,
+      "seed": 7011,
+      "success": true,
+      "len": 125,
+      "decisions": 3,
+      "file": "libero_spatial__task07__ep011.npz"
+    },
+    {
+      "task": "libero_spatial/7",
+      "episode": 12,
+      "seed": 7012,
+      "success": true,
+      "len": 115,
+      "decisions": 3,
+      "file": "libero_spatial__task07__ep012.npz"
+    },
+    {
+      "task": "libero_spatial/7",
+      "episode": 13,
+      "seed": 7013,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task07__ep013.npz"
+    },
+    {
+      "task": "libero_spatial/7",
+      "episode": 14,
+      "seed": 7014,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task07__ep014.npz"
+    },
+    {
+      "task": "libero_spatial/8",
+      "episode": 0,
+      "seed": 8000,
+      "success": true,
+      "len": 92,
+      "decisions": 2,
+      "file": "libero_spatial__task08__ep000.npz"
+    },
+    {
+      "task": "libero_spatial/8",
+      "episode": 1,
+      "seed": 8001,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task08__ep001.npz"
+    },
+    {
+      "task": "libero_spatial/8",
+      "episode": 2,
+      "seed": 8002,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task08__ep002.npz"
+    },
+    {
+      "task": "libero_spatial/8",
+      "episode": 3,
+      "seed": 8003,
+      "success": true,
+      "len": 94,
+      "decisions": 2,
+      "file": "libero_spatial__task08__ep003.npz"
+    },
+    {
+      "task": "libero_spatial/8",
+      "episode": 4,
+      "seed": 8004,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task08__ep004.npz"
+    },
+    {
+      "task": "libero_spatial/8",
+      "episode": 5,
+      "seed": 8005,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task08__ep005.npz"
+    },
+    {
+      "task": "libero_spatial/8",
+      "episode": 6,
+      "seed": 8006,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task08__ep006.npz"
+    },
+    {
+      "task": "libero_spatial/8",
+      "episode": 7,
+      "seed": 8007,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task08__ep007.npz"
+    },
+    {
+      "task": "libero_spatial/8",
+      "episode": 8,
+      "seed": 8008,
+      "success": true,
+      "len": 104,
+      "decisions": 3,
+      "file": "libero_spatial__task08__ep008.npz"
+    },
+    {
+      "task": "libero_spatial/8",
+      "episode": 9,
+      "seed": 8009,
+      "success": true,
+      "len": 91,
+      "decisions": 2,
+      "file": "libero_spatial__task08__ep009.npz"
+    },
+    {
+      "task": "libero_spatial/8",
+      "episode": 10,
+      "seed": 8010,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task08__ep010.npz"
+    },
+    {
+      "task": "libero_spatial/8",
+      "episode": 11,
+      "seed": 8011,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task08__ep011.npz"
+    },
+    {
+      "task": "libero_spatial/8",
+      "episode": 12,
+      "seed": 8012,
+      "success": true,
+      "len": 105,
+      "decisions": 3,
+      "file": "libero_spatial__task08__ep012.npz"
+    },
+    {
+      "task": "libero_spatial/8",
+      "episode": 13,
+      "seed": 8013,
+      "success": true,
+      "len": 272,
+      "decisions": 6,
+      "file": "libero_spatial__task08__ep013.npz"
+    },
+    {
+      "task": "libero_spatial/8",
+      "episode": 14,
+      "seed": 8014,
+      "success": true,
+      "len": 94,
+      "decisions": 2,
+      "file": "libero_spatial__task08__ep014.npz"
+    },
+    {
+      "task": "libero_spatial/9",
+      "episode": 0,
+      "seed": 9000,
+      "success": true,
+      "len": 121,
+      "decisions": 3,
+      "file": "libero_spatial__task09__ep000.npz"
+    },
+    {
+      "task": "libero_spatial/9",
+      "episode": 1,
+      "seed": 9001,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task09__ep001.npz"
+    },
+    {
+      "task": "libero_spatial/9",
+      "episode": 2,
+      "seed": 9002,
+      "success": true,
+      "len": 127,
+      "decisions": 3,
+      "file": "libero_spatial__task09__ep002.npz"
+    },
+    {
+      "task": "libero_spatial/9",
+      "episode": 3,
+      "seed": 9003,
+      "success": true,
+      "len": 118,
+      "decisions": 3,
+      "file": "libero_spatial__task09__ep003.npz"
+    },
+    {
+      "task": "libero_spatial/9",
+      "episode": 4,
+      "seed": 9004,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task09__ep004.npz"
+    },
+    {
+      "task": "libero_spatial/9",
+      "episode": 5,
+      "seed": 9005,
+      "success": true,
+      "len": 123,
+      "decisions": 3,
+      "file": "libero_spatial__task09__ep005.npz"
+    },
+    {
+      "task": "libero_spatial/9",
+      "episode": 6,
+      "seed": 9006,
+      "success": true,
+      "len": 120,
+      "decisions": 3,
+      "file": "libero_spatial__task09__ep006.npz"
+    },
+    {
+      "task": "libero_spatial/9",
+      "episode": 7,
+      "seed": 9007,
+      "success": true,
+      "len": 114,
+      "decisions": 3,
+      "file": "libero_spatial__task09__ep007.npz"
+    },
+    {
+      "task": "libero_spatial/9",
+      "episode": 8,
+      "seed": 9008,
+      "success": true,
+      "len": 118,
+      "decisions": 3,
+      "file": "libero_spatial__task09__ep008.npz"
+    },
+    {
+      "task": "libero_spatial/9",
+      "episode": 9,
+      "seed": 9009,
+      "success": true,
+      "len": 123,
+      "decisions": 3,
+      "file": "libero_spatial__task09__ep009.npz"
+    },
+    {
+      "task": "libero_spatial/9",
+      "episode": 10,
+      "seed": 9010,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task09__ep010.npz"
+    },
+    {
+      "task": "libero_spatial/9",
+      "episode": 11,
+      "seed": 9011,
+      "success": true,
+      "len": 125,
+      "decisions": 3,
+      "file": "libero_spatial__task09__ep011.npz"
+    },
+    {
+      "task": "libero_spatial/9",
+      "episode": 12,
+      "seed": 9012,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task09__ep012.npz"
+    },
+    {
+      "task": "libero_spatial/9",
+      "episode": 13,
+      "seed": 9013,
+      "success": false,
+      "len": 300,
+      "decisions": 6,
+      "file": "libero_spatial__task09__ep013.npz"
+    },
+    {
+      "task": "libero_spatial/9",
+      "episode": 14,
+      "seed": 9014,
+      "success": true,
+      "len": 125,
+      "decisions": 3,
+      "file": "libero_spatial__task09__ep014.npz"
+    }
+  ],
+  "n_decision_points": 605,
+  "n_success": 90,
+  "success_rate": 60.0,
+  "minutes": 7.3
+}

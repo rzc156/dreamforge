@@ -1,0 +1,29 @@
+{
+  "n_states": 4,
+  "world_models": {
+    "base": {
+      "score_base": 0.4897448942065239,
+      "score_random_mean": 0.48956790566444397,
+      "score_random_std": 0.00025293853832408786,
+      "action_swap_delta": 0.00021447241306304932,
+      "latent_swap_norm": 0.40848585963249207,
+      "latent_z0_norm": 34.02911949157715
+    },
+    "aso": {
+      "score_base": 0.4810623675584793,
+      "score_random_mean": 0.47641588747501373,
+      "score_random_std": 0.016292501939460635,
+      "action_swap_delta": 0.010083109140396118,
+      "latent_swap_norm": 17.877297401428223,
+      "latent_z0_norm": 11.409154415130615
+    },
+    "full": {
+      "score_base": 0.9860847592353821,
+      "score_random_mean": 0.9860223084688187,
+      "score_random_std": 3.441541139181936e-05,
+      "action_swap_delta": 0.0002639889717102051,
+      "latent_swap_norm": 14.563800573348999,
+      "latent_z0_norm": 2961.215087890625
+    }
+  }
+}
