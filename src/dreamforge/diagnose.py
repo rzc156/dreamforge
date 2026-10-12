@@ -72,7 +72,7 @@ def wm_sensitivity(wm, head, img96: np.ndarray, base_chunk: np.ndarray, device: 
 
 
 def diagnose(mine_dir: str, wms: list[str], max_states: int = 8, device: str = "cuda",
-             log=print) -> dict:
+             out: str | None = None, log=print) -> dict:
     files = sorted(Path(mine_dir).glob("*.npz"))[:2]
     if not files:
         raise FileNotFoundError(f"no mined .npz under {mine_dir}")
@@ -99,10 +99,11 @@ def diagnose(mine_dir: str, wms: list[str], max_states: int = 8, device: str = "
         log(f"  {name:8s} score_std={agg['score_random_std']:.4f}  "
             f"swap_delta={agg['action_swap_delta']:.4f}  "
             f"latent_swap={agg['latent_swap_norm']:.3f}  |z0|={agg['latent_z0_norm']:.1f}")
-    out = {"n_states": len(states), "world_models": report}
-    Path(DEFAULTS.run_dir).mkdir(parents=True, exist_ok=True)
-    (Path(DEFAULTS.run_dir) / "wm_diagnosis.json").write_text(json.dumps(out, indent=2))
-    return out
+    result = {"n_states": len(states), "world_models": report}
+    out_path = Path(out) if out else Path(DEFAULTS.run_dir) / "wm_diagnosis.json"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(result, indent=2))
+    return result
 
 
 def main() -> None:
@@ -110,9 +111,10 @@ def main() -> None:
     p.add_argument("--mine", default=str(DEFAULTS.run_dir / "mine"))
     p.add_argument("--wms", nargs="*", default=["base", "aso"])
     p.add_argument("--max-states", type=int, default=8)
+    p.add_argument("--out", default=None)
     p.add_argument("--device", default="cuda")
     args = p.parse_args()
-    diagnose(args.mine, args.wms, max_states=args.max_states, device=args.device)
+    diagnose(args.mine, args.wms, max_states=args.max_states, device=args.device, out=args.out)
 
 
 if __name__ == "__main__":
