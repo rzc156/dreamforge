@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 520" width="1280" height="520" role="img" aria-label="dreamforge pipeline: mine, imagine, verify, build, train, eval">
+  <defs>
+    <linearGradient id="pbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0b1220"/>
+      <stop offset="100%" stop-color="#0a101c"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#14304f"/><stop offset="100%" stop-color="#0f2338"/>
+    </linearGradient>
+    <linearGradient id="orange" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4a2a1b"/><stop offset="100%" stop-color="#331d13"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#16321f"/><stop offset="100%" stop-color="#102315"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="3.5" orient="auto">
+      <path d="M0,0 L7,3.5 L0,7 z" fill="#4d6f9c"/>
+    </marker>
+    <style>
+      .sans { font-family: 'Segoe UI','Helvetica Neue',Arial,sans-serif; }
+      .h { font-size: 19px; font-weight: 700; fill: #eaf2ff; }
+      .sub { font-size: 12.5px; fill: #9db4d4; }
+      .cap { font-size: 12px; fill: #7f97b8; }
+      .tag { font-size: 11.5px; fill: #bcd3f5; }
+      .mono { font-family: 'SFMono-Regular',Consolas,'Liberation Mono',monospace; font-size: 11.5px; fill: #9fd0ff; }
+    </style>
+  </defs>
+
+  <rect width="1280" height="520" fill="url(#pbg)"/>
+  <text x="45" y="44" class="sans" font-size="26" font-weight="700" fill="#f2f6ff">The dreamforge pipeline</text>
+  <text x="45" y="66" class="sans sub">six stages · every claim is measurable in the real simulator</text>
+
+  <!-- stage 1 -->
+  <g transform="translate(45,96)">
+    <rect width="170" height="132" rx="14" fill="url(#blue)" stroke="#2a4d78"/>
+    <text x="16" y="30" class="sans h">1 · mine</text>
+    <text x="16" y="56" class="sans tag">roll out the base VLA</text>
+    <text x="16" y="76" class="sans tag">record every decision</text>
+    <text x="16" y="96" class="sans mono">obs · chunk</text>
+    <text x="16" y="112" class="sans mono">sim state · outcome</text>
+  </g>
+  <path d="M222 162 L248 162" stroke="#4d6f9c" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- stage 2 -->
+  <g transform="translate(256,96)">
+    <rect width="170" height="132" rx="14" fill="url(#blue)" stroke="#2a4d78"/>
+    <text x="16" y="30" class="sans h">2 · imagine</text>
+    <text x="16" y="56" class="sans tag">CEM over a latent</text>
+    <text x="16" y="76" class="sans tag">world model</text>
+    <text x="16" y="96" class="sans mono">trust region 0.5σ</text>
+    <text x="16" y="112" class="sans mono">seeded by policy chunk</text>
+  </g>
+  <path d="M433 162 L459 162" stroke="#4d6f9c" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- stage 3 (core) -->
+  <g transform="translate(467,88)">
+    <rect width="184" height="148" rx="14" fill="url(#orange)" stroke="#a8603a" stroke-width="1.5"/>
+    <text x="16" y="30" class="sans h" fill="#ffd8bf">3 · verify</text>
+    <text x="16" y="56" class="sans tag">paired replay of the</text>
+    <text x="16" y="76" class="sans tag">exact saved state</text>
+    <text x="16" y="98" class="sans mono" fill="#ffc79c">none / imagined</text>
+    <text x="16" y="114" class="sans mono" fill="#ffc79c">/ random</text>
+    <text x="16" y="134" class="sans cap">exact McNemar</text>
+  </g>
+  <path d="M658 162 L684 162" stroke="#4d6f9c" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- stage 4 -->
+  <g transform="translate(692,96)">
+    <rect width="170" height="132" rx="14" fill="url(#blue)" stroke="#2a4d78"/>
+    <text x="16" y="30" class="sans h">4 · build</text>
+    <text x="16" y="56" class="sans tag">correction datasets</text>
+    <text x="16" y="76" class="sans tag">+ expert replay</text>
+    <text x="16" y="96" class="sans mono">all / gained / lifted</text>
+    <text x="16" y="112" class="sans mono">decision-step filter</text>
+  </g>
+  <path d="M869 162 L895 162" stroke="#4d6f9c" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- stage 5 -->
+  <g transform="translate(903,96)">
+    <rect width="170" height="132" rx="14" fill="url(#green)" stroke="#2f6b3a"/>
+    <text x="16" y="30" class="sans h" fill="#d6f7dc">5 · train</text>
+    <text x="16" y="56" class="sans tag">SmolVLA fine-tune</text>
+    <text x="16" y="76" class="sans tag">flow matching</text>
+    <text x="16" y="96" class="sans mono" fill="#9fe8ac">replay mix 50%</text>
+    <text x="16" y="112" class="sans mono" fill="#9fe8ac">3000 steps · 16 GB</text>
+  </g>
+  <path d="M1080 162 L1106 162" stroke="#4d6f9c" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- stage 6 -->
+  <g transform="translate(1114,96)">
+    <rect width="121" height="132" rx="14" fill="url(#blue)" stroke="#2a4d78"/>
+    <text x="16" y="30" class="sans h">6 · eval</text>
+    <text x="16" y="56" class="sans tag">paired closed</text>
+    <text x="16" y="76" class="sans tag">loop</text>
+    <text x="16" y="96" class="sans mono">Wilson CI</text>
+    <text x="16" y="112" class="sans mono">report + HTML</text>
+  </g>
+
+  <!-- lower band: rationale -->
+  <g transform="translate(45,286)">
+    <rect width="1190" height="196" rx="16" fill="#0d1524" stroke="#1d2f4a"/>
+    <text x="26" y="36" class="sans" font-size="15" font-weight="600" fill="#cfe0f7">Why every claim is trustworthy</text>
+
+    <g transform="translate(26,60)">
+      <circle cx="8" cy="8" r="8" fill="#3ba7ff" fill-opacity="0.18" stroke="#3ba7ff"/>
+      <text x="30" y="13" class="sans tag">exact state round-trip</text>
+      <text x="30" y="34" class="sans cap">MuJoCo state is serialized and restored; the</text>
+      <text x="30" y="52" class="sans cap">"do nothing" arm reproduces the original episode</text>
+      <text x="30" y="70" class="sans cap">length exactly — the comparison is anchored.</text>
+    </g>
+
+    <g transform="translate(330,60)">
+      <circle cx="8" cy="8" r="8" fill="#ffb86b" fill-opacity="0.18" stroke="#ffb86b"/>
+      <text x="30" y="13" class="sans tag">equal-budget controls</text>
+      <text x="30" y="34" class="sans cap">A random perturbation of the same per-dimension</text>
+      <text x="30" y="52" class="sans cap">magnitude isolates what the world model's</text>
+      <text x="30" y="70" class="sans cap">direction actually buys — usually nothing.</text>
+    </g>
+
+    <g transform="translate(634,60)">
+      <circle cx="8" cy="8" r="8" fill="#7ee787" fill-opacity="0.18" stroke="#7ee787"/>
+      <text x="30" y="13" class="sans tag">statistics that fit the design</text>
+      <text x="30" y="34" class="sans cap">Paired exact McNemar on discordant pairs, Wilson</text>
+      <text x="30" y="52" class="sans cap">intervals everywhere, and an episode-clustered</text>
+      <text x="30" y="70" class="sans cap">summary against pseudo-replication.</text>
+    </g>
+
+    <g transform="translate(938,60)">
+      <circle cx="8" cy="8" r="8" fill="#c792ea" fill-opacity="0.18" stroke="#c792ea"/>
+      <text x="30" y="13" class="sans tag">pre-flight diagnostics</text>
+      <text x="30" y="34" class="sans cap">Measure a world model's action response before</text>
+      <text x="30" y="52" class="sans cap">trusting its imagination (the unregularized</text>
+      <text x="30" y="70" class="sans cap">checkpoint ignores actions entirely).</text>
+    </g>
+
+    <text x="26" y="168" class="sans cap">Artifacts (JSONL per trial, per-episode outcomes, diagnosis JSON, figures) are the evidence; the report is regenerated from them with one command.</text>
+  </g>
+</svg>

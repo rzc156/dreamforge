@@ -1,0 +1,33 @@
+name: Feature request
+description: A new suite, diagnostic, statistic, figure, or CLI capability
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: A deployment or research pain point, not a solution yet.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: |
+        Which stage does it touch (mine/imagine/verify/build/train/eval/report/dashboard),
+        and what would it let someone claim or measure?
+    validations:
+      required: true
+  - type: textarea
+    id: measurement
+    attributes:
+      label: How would we know it works?
+      description: The metric, control, and expected artifact. Paired designs preferred.
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - Small (a function + test)
+        - Medium (a stage or CLI command)
+        - Large (new suite / model / environment)

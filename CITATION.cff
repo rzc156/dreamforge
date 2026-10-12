@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite it as below."
+title: "dreamforge: turn world-model imagination into corrective training data for robot policies"
+abstract: >-
+  A single-GPU pipeline that mines a vision-language-action policy's failure
+  states, uses a latent world model to search corrective action chunks with CEM,
+  verifies every correction by replaying the exact simulator state, and measures
+  whether training on the corrections improves the policy.
+type: software
+authors:
+  - family-names: Rao
+    given-names: Zhichao
+    alias: rzc156
+repository-code: "https://github.com/rzc156/dreamforge"
+license: MIT
+keywords:
+  - robotics
+  - vision-language-action
+  - world model
+  - imitation learning
+  - LIBERO
+  - LeRobot
+version: 0.1.0
+date-released: "2026-10-12"

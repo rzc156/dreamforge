@@ -1,0 +1,52 @@
+name: Bug report
+description: Something in the pipeline is wrong or a number cannot be reproduced
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. Please keep it reproducible: the most useful
+        report lets someone regenerate the wrong number from a command plus an
+        artifact.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: The wrong behaviour, with the exact numbers if applicable.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: input
+    id: command
+    attributes:
+      label: Command
+      placeholder: python -m dreamforge.verify --mine runs/main/mine --imagine runs/main/imagine ...
+    validations:
+      required: true
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      description: OS, GPU/driver, Python, torch, lerobot, robosuite, MuJoCo versions.
+      placeholder: |
+        Ubuntu 24.04, RTX 5080, driver 580
+        python 3.12.3, torch 2.11.0+cu130, lerobot 0.6.1, robosuite 1.4.0, mujoco 3.4.0
+    validations:
+      required: true
+  - type: textarea
+    id: artifacts
+    attributes:
+      label: Artifacts
+      description: Relevant snippets of runs/*.jsonl, report.md, or a minimal .npz (do not attach large files).
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I ran `pytest tests -q` and it passes
+        - label: I searched existing issues

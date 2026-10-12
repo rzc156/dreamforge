@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 320" width="1280" height="320" role="img" aria-label="dreamforge: turn world-model imagination into corrective training data for robot policies">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#070b16"/>
+      <stop offset="55%" stop-color="#0b1730"/>
+      <stop offset="100%" stop-color="#10243b"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3ba7ff"/>
+      <stop offset="100%" stop-color="#7ee787"/>
+    </linearGradient>
+    <linearGradient id="warm" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffb86b"/>
+      <stop offset="100%" stop-color="#ff7a59"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="18%" cy="12%" r="70%">
+      <stop offset="0%" stop-color="#3ba7ff" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#3ba7ff" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#8fb4ff" stroke-opacity="0.07" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1280" height="320" fill="url(#bg)"/>
+  <rect width="1280" height="320" fill="url(#grid)"/>
+  <rect width="1280" height="320" fill="url(#glow)"/>
+
+  <!-- mark: a forge spark / node graph -->
+  <g transform="translate(84,86)">
+    <circle cx="0" cy="74" r="7" fill="#3ba7ff"/>
+    <circle cx="52" cy="34" r="7" fill="#7ee787"/>
+    <circle cx="52" cy="114" r="7" fill="#ffb86b"/>
+    <circle cx="112" cy="74" r="9" fill="none" stroke="url(#accent)" stroke-width="2.5"/>
+    <path d="M0 74 L52 34 M0 74 L52 114 M52 34 L112 74 M52 114 L112 74" stroke="#5b7fb5" stroke-width="1.6" fill="none"/>
+    <path d="M112 74 l26 -16 M112 74 l26 16" stroke="url(#warm)" stroke-width="1.6" fill="none" stroke-dasharray="4 4"/>
+  </g>
+
+  <text x="270" y="150" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="74" font-weight="700" fill="#f2f6ff" letter-spacing="-1.5">dreamforge</text>
+  <text x="274" y="192" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="22" fill="#9fb6d6">turn world-model imagination into corrective training data</text>
+
+  <g font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="15">
+    <rect x="274" y="218" width="126" height="30" rx="15" fill="#12253f" stroke="#25476f"/>
+    <text x="337" y="238" fill="#9fd0ff" text-anchor="middle">SmolVLA</text>
+    <rect x="412" y="218" width="106" height="30" rx="15" fill="#12253f" stroke="#25476f"/>
+    <text x="465" y="238" fill="#9fd0ff" text-anchor="middle">LIBERO</text>
+    <rect x="530" y="218" width="72" height="30" rx="15" fill="#12253f" stroke="#25476f"/>
+    <text x="566" y="238" fill="#9fd0ff" text-anchor="middle">CEM</text>
+    <rect x="614" y="218" width="168" height="30" rx="15" fill="#12253f" stroke="#25476f"/>
+    <text x="698" y="238" fill="#9fd0ff" text-anchor="middle">paired replay · stats</text>
+    <rect x="794" y="218" width="132" height="30" rx="15" fill="#1b2a1d" stroke="#2f6b3a"/>
+    <text x="860" y="238" fill="#8ee89a" text-anchor="middle">single GPU</text>
+  </g>
+
+  <g opacity="0.85">
+    <text x="1196" y="292" font-family="'Segoe UI', Arial, sans-serif" font-size="13" fill="#5f7796" text-anchor="end">MIT · research code · reproducible</text>
+  </g>
+</svg>

@@ -29,6 +29,13 @@ dependencies = [
 sim = ["lerobot>=0.6.1", "libero", "robosuite", "mujoco"]
 dev = ["pytest>=7"]
 
+[project.urls]
+Homepage = "https://github.com/rzc156/dreamforge"
+Repository = "https://github.com/rzc156/dreamforge"
+Issues = "https://github.com/rzc156/dreamforge/issues"
+Changelog = "https://github.com/rzc156/dreamforge/blob/main/CHANGELOG.md"
+Dashboard = "https://rzc156.github.io/dreamforge/"
+
 [project.scripts]
 dreamforge = "dreamforge.cli:main"
 

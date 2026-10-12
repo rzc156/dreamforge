@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Question or discussion
+    url: https://github.com/rzc156/dreamforge/discussions
+    about: Ask about the protocol, statistics, or how to reproduce a run.
+  - name: Read the protocol first
+    url: https://github.com/rzc156/dreamforge/blob/main/docs/protocol.md
+    about: The experimental design, controls, and known caveats.

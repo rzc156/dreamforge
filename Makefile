@@ -6,13 +6,17 @@ EPISODES ?= 20
 WM ?= aso
 PY ?= python
 
-.PHONY: test mine imagine verify build train eval report diagnose pilot clean
+.PHONY: test mine imagine verify build train eval report dashboard diagnose figures pilot clean
 
 test:
 	$(PY) -m pytest tests -q
 
+dashboard:
+	$(PY) -m dreamforge.dashboard --run $(RUN) --out results/dashboard.html
+
 diagnose:
-	$(PY) -m dreamforge.diagnose --mine $(RUN)/mine --wms base aso
+	$(PY) -m dreamforge.diagnose --mine $(RUN)/mine --wms base aso full \
+		--out $(RUN)/wm_diagnosis.json
 
 mine:
 	$(PY) -m dreamforge.mine --task $(TASK) --episodes $(EPISODES) --out $(RUN)/mine
@@ -38,6 +42,9 @@ eval:
 
 report:
 	$(PY) -m dreamforge.report --run $(RUN)
+
+figures:
+	$(PY) -m dreamforge.figures --run $(RUN)
 
 pilot:
 	$(PY) -m dreamforge.mine --task libero_spatial --task-ids 0 --episodes 2 --out $(RUN)/mine
