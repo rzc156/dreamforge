@@ -138,6 +138,14 @@ def make_report(run_dir: str, out_file: str | None = None) -> str:
     text = "\n".join(lines)
     out = Path(out_file) if out_file else run / "report.md"
     out.write_text(text)
+    try:  # figures are best-effort
+        from .figures import make_figures
+
+        for f in make_figures(str(run)):
+            lines.append(f"![figure]({Path(f).name})")
+        out.write_text("\n".join(lines))
+    except Exception as exc:  # pragma: no cover
+        print("figures skipped:", exc)
     print(text)
     return text
 
