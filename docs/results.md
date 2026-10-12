@@ -17,17 +17,20 @@ Everything below is regenerated from the artifacts in `runs/main` by
 
 ## W0 — pre-flight: the world model must respond to actions
 
-`python -m dreamforge.diagnose --mine runs/main/mine --wms base aso`:
+`python -m dreamforge.diagnose --mine runs/main/mine --wms base aso full`
+(12 states; artifact: `runs/main/wm_diagnosis.json`):
 
-| world model | score std over random plans | action-swap Δprogress | |z0| |
-|---|---|---|---|
-| `base` (1.39M) | 0.0003 | 0.0003 | 33 |
-| `aso` (3.75M) | 0.0215 | 0.0150 | 14 |
+| world model | score std over random plans | action-swap Δprogress | latent swap norm | mean |z0| |
+|---|---|---|---|---|---|
+| `base` (1.39M) | 0.0003 | 0.0002 | 0.41 | 34 |
+| `aso` (3.75M) | **0.0163** | **0.0101** | 17.9 | 11 |
+| `full` (3.75M) | 0.0000 | 0.0003 | 14.6 | 2961 |
 
-The unregularised model ignores the action almost exactly (a reproduction of
-the *action vacancy* phenomenon); CEM cannot optimise it. All runs use `aso`.
-Takeaway, shipped as a tool: **measure action response before trusting a world
-model for imagination.**
+`base` ignores the action almost exactly (a reproduction of the *action
+vacancy* phenomenon); CEM cannot optimise it. `full` has collapsed latents
+(|z0| ~ 3000) and is unusable. All runs use `aso`, whose action response is
+~50× larger. Takeaway, shipped as a tool: **measure action response before
+trusting a world model for imagination.**
 
 ## W1 — imagination raises imagined progress
 
