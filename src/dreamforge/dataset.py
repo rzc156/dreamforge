@@ -64,10 +64,17 @@ def _load_verify(verify_dir: Path) -> dict[tuple[str, int], dict[str, bool]]:
 
 
 def _state_stats(policy_path: str):
-    """Mean/std used by the policy's state normalizer (for de-normalizing legacy picks)."""
+    """Mean/std used by the policy's state normalizer (for de-normalizing legacy picks).
+
+    Returns ``(None, None)`` when the auxiliary dependency is unavailable, so the
+    builder still works in lightweight environments (e.g. unit tests / CI).
+    """
     import glob
 
-    from safetensors.torch import load_file
+    try:
+        from safetensors.torch import load_file
+    except ModuleNotFoundError:  # pragma: no cover - dependency is optional here
+        return None, None
 
     cands = sorted(glob.glob(policy_path + "/**/*normalizer*safetensors", recursive=True))
     for f in cands:
