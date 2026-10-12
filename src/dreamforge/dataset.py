@@ -61,20 +61,42 @@ def _load_verify(verify_dir: Path) -> dict[tuple[str, int], dict[str, bool]]:
     return out
 
 
+def _state_stats(policy_path: str):
+    """Mean/std used by the policy's state normalizer (for de-normalizing legacy picks)."""
+    import glob
+
+    from safetensors.torch import load_file
+
+    cands = sorted(glob.glob(policy_path + "/**/*normalizer*safetensors", recursive=True))
+    for f in cands:
+        try:
+            sd = load_file(f)
+        except Exception:
+            continue
+        if "observation.state.mean" in sd and "observation.state.std" in sd:
+            return (sd["observation.state.mean"].numpy().astype(np.float32),
+                    sd["observation.state.std"].numpy().astype(np.float32))
+    return None, None
+
+
 def build_dataset(cfg: BuildConfig, log=print) -> dict:
     out_dir = Path(cfg.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
+    for stale in out_dir.glob("samples_*.npz"):  # a rebuild must not mix with previous shards
+        stale.unlink()
     verify = _load_verify(Path(cfg.verify_dir)) if cfg.verify_dir else {}
+    mean, std = _state_stats(DEFAULTS.policy_path)
 
     n = 0
     shard: list[dict] = []
+    shard_id = 0
 
     def flush_shard() -> None:
-        nonlocal shard, n
+        nonlocal shard, shard_id, n
         if not shard:
             return
-        idx = len(list(out_dir.glob("samples_*.npz")))
-        path = out_dir / f"samples_{idx:04d}.npz"
+        path = out_dir / f"samples_{shard_id:04d}.npz"
+        shard_id += 1
         np.savez_compressed(
             path,
             image=np.stack([s["image"] for s in shard]),
@@ -107,10 +129,17 @@ def build_dataset(cfg: BuildConfig, log=print) -> dict:
             if not keep:
                 counts["skipped"] += 1
                 continue
+            # state must be in dataset space (the training batch normalizes it again)
+            if "state_env" in m.files:
+                state = np.asarray(m["state_env"][s], dtype=np.float32)
+            elif mean is not None:
+                state = np.asarray(m["state"][s], dtype=np.float32) * (std + 1e-8) + mean
+            else:
+                state = np.asarray(m["state"][s], dtype=np.float32)
             shard.append({
                 "image": np.asarray(m["image"][s], dtype=np.uint8),
                 "image2": np.asarray(m["image2"][s], dtype=np.uint8),
-                "state": np.asarray(m["state"][s], dtype=np.float32),
+                "state": state,
                 "action": np.asarray(d["correction"][s], dtype=np.float32),
                 "task": str(m["task_desc"]),
                 "meta": {"file": f.name, "decision": s,

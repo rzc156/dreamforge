@@ -22,8 +22,11 @@ still an interpretable result:
   the previous study (chunk = 50, two cameras, 8-D state).
 * Suite: `libero_spatial` (10 tasks). Episodes: N per task, seeds fixed.
 * At every decision point (chunk boundary) we store: the observation the policy
-  saw (both cameras), the executed chunk in **dataset raw action space**, the
-  flattened MuJoCo state, and the episode outcome.
+  saw (both cameras at 360×360), the executed chunk in **dataset raw action
+  space**, the flattened MuJoCo state, and the episode outcome.
+* The stored `observation.state` is the *dataset-space* (un-normalized) vector,
+  because training batches pass through the policy's normalizer again. Legacy
+  picks without this field are de-normalized with the policy's stored stats.
 * `sim_state` allows exact replay later: `MjSimState.from_flattened` +
   `sim.set_state` + `sim.forward()`.
 
@@ -32,11 +35,17 @@ still an interpretable result:
 * Latent world model: encoder 96×96 agent view → z (128-d); MLP transition on
   `(z, a)`; progress head `z → p ∈ [0,1]` trained on normalized episode time.
 * Search: CEM in action space, horizon 50 (matching the policy chunk), seeded
-  with the base policy's own chunk, actions clipped to dataset min/max.
+  with the base policy's own chunk.
+* **Trust region.** The search is bounded to `base ± 0.5σ` *per action
+  dimension* (σ = dataset action std), then clipped to the dataset range.
+  This matters: an unconstrained search drives the low-variance rotation
+  dimensions to the extremes of the dataset range, which are legal robot
+  commands but far outside the policy's action distribution — the imagined
+  plans stop being *corrections* of the policy's plan. The control arm is a
+  uniform perturbation of the base chunk within exactly the same per-dim budget.
 * Score: mean progress over the last 3 imagined steps.
 * Saved per state: best plan, best/initial score, imagined progress curve,
-  CEM history, plus a persisted uniform-random plan of the same length (the
-  `random` control is therefore identical across reruns).
+  CEM history, plus the persisted random control plan.
 
 ## Verification
 

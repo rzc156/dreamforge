@@ -35,7 +35,8 @@ class ImagineConfig:
     def __init__(self, mine_dir: str, out_dir: str, wm: str = "base", context: str = "failure",
                  max_states: int | None = None, horizon: int = 50, population: int = 64,
                  elites: int = 8, iters: int = 6, init_std: float = 0.25, seed: int = 0,
-                 action_clip: bool = True, device: str = "cuda"):
+                 action_clip: bool = True, delta: float | None = None, delta_sigma: float = 0.5,
+                 device: str = "cuda"):
         self.mine_dir = mine_dir
         self.out_dir = out_dir
         self.wm = wm
@@ -48,6 +49,8 @@ class ImagineConfig:
         self.init_std = init_std
         self.seed = seed
         self.action_clip = action_clip
+        self.delta = delta              # uniform trust region (optional)
+        self.delta_sigma = delta_sigma  # per-dim trust region = delta_sigma * std
         self.device = device
 
 
@@ -60,14 +63,27 @@ def _action_bounds() -> tuple[np.ndarray, np.ndarray]:
     return np.full(7, -1.0, np.float32), np.full(7, 1.0, np.float32)
 
 
+def _action_scale() -> np.ndarray:
+    """Per-dimension std of dataset actions (used to size the trust region)."""
+    cache = Path(DEFAULTS.action_cache)
+    if cache.exists():
+        a = np.load(cache, mmap_mode="r")
+        s = np.asarray(a).std(axis=0).astype(np.float32)
+        return np.maximum(s, 1e-3)
+    return np.full(7, 0.1, np.float32)
+
+
 def imagine(cfg: ImagineConfig, log=print) -> dict:
     out_dir = Path(cfg.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     wm, ckpt = load_world_model(DEFAULTS.wm_path(cfg.wm), device=cfg.device)
     head = make_progress_head(ckpt, device=cfg.device)
     low, high = _action_bounds()
+    scale = _action_scale()
+    delta_per_dim = tuple(float(x) for x in (scale * cfg.delta_sigma)) if cfg.delta_sigma else None
     cem_cfg = CEMConfig(horizon=cfg.horizon, population=cfg.population, elites=cfg.elites,
                         iters=cfg.iters, init_std=cfg.init_std, seed=cfg.seed,
+                        delta=cfg.delta, delta_per_dim=delta_per_dim,
                         low=tuple(low) if cfg.action_clip else None,
                         high=tuple(high) if cfg.action_clip else None)
     cem = ActionCEM(wm, head, cem_cfg, device=cfg.device)
@@ -99,7 +115,11 @@ def imagine(cfg: ImagineConfig, log=print) -> dict:
             init_scores.append(res.init_score)
             curves.append(np.asarray(res.progress_curve, dtype=np.float32))
             histories.append(np.asarray(res.history, dtype=np.float32))
-            randoms.append(rng.uniform(low, high, size=(cfg.horizon, 7)).astype(np.float32))
+            # control: random perturbation of the *base chunk* within the same per-dim budget
+            base = np.asarray(d["chunk_raw"][s], dtype=np.float32)[: cfg.horizon]
+            budget = (scale * cfg.delta_sigma) if cfg.delta_sigma else np.full(7, 0.15, np.float32)
+            rnd = np.clip(base + rng.uniform(-1.0, 1.0, size=base.shape) * budget, low, high)
+            randoms.append(rnd.astype(np.float32))
         np.savez_compressed(
             out_dir / f.name,
             correction=np.stack(corrections), wm_best_score=np.asarray(best_scores, np.float32),
@@ -137,6 +157,10 @@ def main() -> None:
     p.add_argument("--population", type=int, default=64)
     p.add_argument("--elites", type=int, default=8)
     p.add_argument("--iters", type=int, default=6)
+    p.add_argument("--delta", type=float, default=None,
+                   help="uniform trust-region half-width (optional; prefer --delta-sigma)")
+    p.add_argument("--delta-sigma", type=float, default=0.5,
+                   help="per-dimension trust region as a multiple of dataset action std (0 disables)")
     p.add_argument("--seed", type=int, default=0)
     p.add_argument("--device", default="cuda")
     args = p.parse_args()
@@ -144,6 +168,7 @@ def main() -> None:
                           context=args.context, max_states=args.max_states,
                           horizon=args.horizon, population=args.population,
                           elites=args.elites, iters=args.iters, seed=args.seed,
+                          delta=args.delta, delta_sigma=args.delta_sigma,
                           device=args.device))
 
 

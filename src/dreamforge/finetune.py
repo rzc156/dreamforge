@@ -81,7 +81,8 @@ class SyntheticSamples(Dataset):
         return {
             "observation.images.image": img,
             "observation.images.image2": img2,
-            "observation.state": torch.from_numpy(d["state"][i]).float(),
+            # dataset batches carry an n_obs_steps dim on the state: (1, state_dim)
+            "observation.state": torch.from_numpy(d["state"][i]).float().unsqueeze(0),
             "action": torch.from_numpy(d["action"][i]).float(),
             "task": str(d["task"][i]),
         }

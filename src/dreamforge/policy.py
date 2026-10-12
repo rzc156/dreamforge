@@ -48,6 +48,19 @@ class SmolVLABundle:
         o = self.pre(o)
         return o
 
+    def obs_state_env(self, obs: dict, task_desc: str) -> "np.ndarray":
+        """Dataset-space (un-normalized) ``observation.state`` for a raw env obs.
+
+        Training samples must store the state *before* policy normalization,
+        because the training batch runs through ``pre`` again.
+        """
+        from lerobot.envs.utils import preprocess_observation
+
+        o = preprocess_observation(obs)
+        o["task"] = [task_desc]
+        o = self.env_pre(o)
+        return np.asarray(o["observation.state"][0].detach().cpu(), dtype=np.float32)
+
     # ------------------------------------------------------------------ actions
     def sample_chunk(self, o: dict, noise: torch.Tensor | None = None) -> torch.Tensor:
         """Normalized action chunk, shape (1, chunk_size, action_dim)."""

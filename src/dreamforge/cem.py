@@ -31,6 +31,12 @@ class CEMConfig:
     momentum: float = 0.7
     score_tail: int = 3        # average progress over the last k imagined steps
     seed: int = 0
+    # trust region: if set, each action is bounded to base +/- delta (then clipped
+    # to the dataset range).  Keeps plans plausible; without it CEM drives rotation
+    # dims to the extremes of the dataset range.
+    delta: float | None = None
+    # per-dimension trust region (preferred): base +/- delta_per_dim, e.g. 0.5 * std
+    delta_per_dim: tuple[float, ...] | None = None
     # optional bounds on actions (dataset min/max); None disables clipping
     low: tuple[float, ...] | None = None
     high: tuple[float, ...] | None = None
@@ -90,13 +96,24 @@ class ActionCEM:
         best_actions, best_score, best_progress = mu.clone(), -1.0, []
         history: list[float] = []
 
+        # action bounds: global dataset bounds, optionally intersected with a
+        # trust region around the seed plan
+        lo_t = self._low.view(1, A).expand(H, A).clone() if self._low is not None else None
+        hi_t = self._high.view(1, A).expand(H, A).clone() if self._high is not None else None
+        if cfg.delta_per_dim is not None and init_mean is not None:
+            d = torch.tensor(cfg.delta_per_dim, device=self.device, dtype=mu.dtype).view(1, A)
+            lo_t = (mu - d) if lo_t is None else torch.maximum(mu - d, lo_t)
+            hi_t = (mu + d) if hi_t is None else torch.minimum(mu + d, hi_t)
+        elif cfg.delta is not None and init_mean is not None:
+            d = float(cfg.delta)
+            lo_t = (mu - d) if lo_t is None else torch.maximum(mu - d, lo_t)
+            hi_t = (mu + d) if hi_t is None else torch.minimum(mu + d, hi_t)
+
         for _ in range(cfg.iters):
             eps = torch.randn(cfg.population, H, A, generator=gen, device=self.device)
             cand = mu.unsqueeze(0) + sigma.unsqueeze(0) * eps
-            if self._low is not None:
-                lo = self._low.view(1, 1, A)
-                hi = self._high.view(1, 1, A)
-                cand = torch.max(torch.min(cand, hi), lo)
+            if lo_t is not None:
+                cand = torch.maximum(torch.minimum(cand, hi_t), lo_t)
             scores, progress = self._rollout_scores(z0, cand)
             k = min(cfg.elites, cfg.population)
             top = torch.topk(scores, k).indices

@@ -68,6 +68,7 @@ def _rollout_episode(bundle: SmolVLABundle, gym_env, task_desc: str, seed: int,
     images2: list[np.ndarray] = []
     thumbs: list[np.ndarray] = []
     states: list[np.ndarray] = []
+    states_env: list[np.ndarray] = []
     chunks: list[np.ndarray] = []
     sim_states: list[np.ndarray] = []
 
@@ -81,6 +82,7 @@ def _rollout_episode(bundle: SmolVLABundle, gym_env, task_desc: str, seed: int,
 
         decision_steps.append(step)
         states.append(np.asarray(o["observation.state"][0].detach().cpu(), dtype=np.float32))
+        states_env.append(bundle.obs_state_env(obs, task_desc))
         chunks.append(np.asarray(raw_chunk[0].detach().cpu(), dtype=np.float32))
         sim_states.append(save_sim_state(gym_env))
         if cfg.save_images:
@@ -106,6 +108,7 @@ def _rollout_episode(bundle: SmolVLABundle, gym_env, task_desc: str, seed: int,
         "horizon": horizon,
         "decision_steps": np.asarray(decision_steps, dtype=np.int64),
         "state": np.stack(states) if states else np.zeros((0, 8), np.float32),
+        "state_env": np.stack(states_env) if states_env else np.zeros((0, 8), np.float32),
         "chunk_raw": np.stack(chunks) if chunks else np.zeros((0, 50, 7), np.float32),
         "sim_state": np.stack(sim_states) if sim_states else np.zeros((0, 1), np.float64),
         "img96": np.stack(thumbs) if thumbs else np.zeros((0, 96, 96, 3), np.uint8),
@@ -143,7 +146,8 @@ def mine(cfg: MineConfig, log=print) -> dict:
                 task_name=name, task_id=task_id, episode=ep, seed=seed,
                 task_desc=task_desc, success=rec["success"], episode_len=rec["episode_len"],
                 horizon=rec["horizon"], decision_steps=rec["decision_steps"],
-                state=rec["state"], chunk_raw=rec["chunk_raw"], sim_state=rec["sim_state"],
+                state=rec["state"], state_env=rec["state_env"], chunk_raw=rec["chunk_raw"],
+                sim_state=rec["sim_state"],
                 img96=rec["img96"], image=rec["image"], image2=rec["image2"],
             )
             summary["episodes"].append({
