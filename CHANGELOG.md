@@ -9,6 +9,8 @@ follow [Semantic Versioning](https://semver.org/).
 ### Added
 - `dashboard` command: a self-contained HTML run report (inline CSS + SVG
   charts, no CDN or JavaScript) for offline viewing and GitHub Pages.
+  The page is **bilingual (English / 中文)** with a CSS-only switch — hidden
+  radio inputs and sibling selectors, so it still ships no script.
 - `diagnose` command: world-model pre-flight check for action response
   (reproduces the "action vacancy" phenomenon).
 - `build --max-decision-step`: restrict corrections to early (recoverable)

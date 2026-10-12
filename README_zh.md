@@ -64,16 +64,18 @@ LIBERO-Spatial · SmolVLA-450M · 150 回合采矿 → **360 个失败状态** �
 ## 交互式仪表盘
 
 每次运行都能从工件生成一个**自包含 HTML 仪表盘**（无 CDN、无 JS），适合当报告、贴 PR 或挂 GitHub Pages。
+页面内置**纯 CSS 的中英切换**（隐藏单选按钮 + 兄弟选择器），因此始终保持零脚本。
 
 <p align="center">
-  <img src="assets/dashboard.png" alt="dreamforge 仪表盘" width="92%">
+  <img src="assets/dashboard-zh.png" alt="dreamforge 仪表盘（中文）" width="92%">
 </p>
 
 ```bash
 python -m dreamforge.dashboard --run runs/main --out results/dashboard.html
 ```
 
-仓库内的成品见 [`results/dashboard.html`](results/dashboard.html)。
+仓库内的成品见 [`results/dashboard.html`](results/dashboard.html)（英文视图见
+[`assets/dashboard.png`](assets/dashboard.png)）。
 
 ## 快速开始
 

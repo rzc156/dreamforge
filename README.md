@@ -81,17 +81,20 @@ response, (2) benchmark its output against an equal-budget random perturbation,
 ## Interactive dashboard
 
 Every run renders a **self-contained HTML dashboard** (no CDN, no JavaScript)
-from its artifacts — handy for a report, a PR, or GitHub Pages.
+from its artifacts — handy for a report, a PR, or GitHub Pages. It ships with a
+**CSS-only English / 中文 switch** (hidden radio inputs + sibling selectors, so
+the page stays script-free).
 
 <p align="center">
-  <img src="assets/dashboard.png" alt="dreamforge dashboard" width="92%">
+  <img src="assets/dashboard.png" alt="dreamforge dashboard (English)" width="92%">
 </p>
 
 ```bash
 python -m dreamforge.dashboard --run runs/main --out results/dashboard.html
 ```
 
-The committed copy lives at [`results/dashboard.html`](results/dashboard.html).
+The committed copy lives at [`results/dashboard.html`](results/dashboard.html)
+(and the Chinese view is at [`assets/dashboard-zh.png`](assets/dashboard-zh.png)).
 
 ## Quickstart
 
