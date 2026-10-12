@@ -71,6 +71,29 @@ def make_report(run_dir: str, out_file: str | None = None) -> str:
                                  f"{tab.n_pairs} paired states), exact McNemar p = {p:.4f}")
             lines.append("")
 
+            # --- episode-clustered view (states within an episode are correlated) ---
+            if "imagined" in per_arm and "none" in per_arm:
+                by_ep: dict[str, list[tuple[bool, bool]]] = {}
+                for key, r in rows.items():
+                    if "imagined" not in r or "none" not in r:
+                        continue
+                    by_ep.setdefault(r["imagined"]["file"], []).append(
+                        (bool(r["imagined"]["success"]), bool(r["none"]["success"])))
+                if by_ep:
+                    diffs = []
+                    better = worse = equal = 0
+                    for v in by_ep.values():
+                        d = np.mean([a for a, _ in v]) - np.mean([b for _, b in v])
+                        diffs.append(d)
+                        better += d > 0
+                        worse += d < 0
+                        equal += d == 0
+                    lines += ["### Episode-clustered view (guard against pseudo-replication)", "",
+                              f"- episodes with paired states: **{len(by_ep)}**",
+                              f"- mean per-episode delta (imagined - none): **{100 * np.mean(diffs):+.1f}pp**",
+                              f"- episodes better / equal / worse: **{better} / {equal} / {worse}**",
+                              ""]
+
             # --- does the world model's own score predict real value? ---
             pairs = [(r["imagined"]["wm_best_score"] - r["imagined"]["wm_init_score"],
                       float(r["imagined"]["success"]) - float(r["none"]["success"]))
