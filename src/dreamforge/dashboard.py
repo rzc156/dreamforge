@@ -63,7 +63,14 @@ STRINGS: dict[str, dict[str, str]] = {
         "h_verify": "What imagined corrections are worth (real simulator)",
         "verify_sub": ("Each mined state is restored exactly and replayed with three arms, then the unchanged policy "
                        "resumes. The <code>none</code> arm reproduces the original episode, which anchors the comparison."),
-        "p_curve": "Imagined progress along the CEM plan", "p_curve_sub": "mean ± sd over mined failure states",
+        "p_curve": "Imagined progress along the CEM plan",
+        "p_curve_sub": "world-model read-out · mean ± sd over mined failure states (not simulator success)",
+        "p_curve_note": ("What this is: the world model rolls a candidate plan forward 50 steps in latent space "
+                         "(no simulator); a small head then predicts <b>episode-time progress</b> p∈[0,1] from each "
+                         "imagined latent. The head is trained on demonstration frames labelled by their normalised "
+                         "time inside the episode, so p is a <i>time</i> proxy for task progress. CEM maximises the mean "
+                         "of the last 3 imagined steps. Read-outs like this correlate only weakly with real outcomes "
+                         "(+0.09), which is the finding this repository is about."),
         "t_arms": "Arms", "t_arm": "arm", "t_n": "n", "t_success": "success", "t_rate": "rate", "t_ci": "95% CI",
         "t_paired": "Paired tests (exact McNemar)", "t_comparison": "comparison", "t_delta": "delta",
         "t_impr": "improve/worsen", "t_p": "p",
@@ -116,7 +123,12 @@ STRINGS: dict[str, dict[str, str]] = {
         "h_verify": "想象纠错的真实价值（真实仿真器）",
         "verify_sub": ("精确恢复每个挖掘状态并执行三臂回放，随后交回未修改的策略。<code>none</code> 臂复现原始回合，"
                        "作为配对比较的锚点。"),
-        "p_curve": "想象进度随 CEM 计划的变化", "p_curve_sub": "在挖掘到的失败状态上的均值 ± 标准差",
+        "p_curve": "想象进度随 CEM 计划的变化",
+        "p_curve_sub": "世界模型读出值 · 在挖掘到的失败状态上（均值 ± 标准差）· 并非仿真器判定的成功",
+        "p_curve_note": ("这是什么：世界模型在<b>潜空间</b>把候选计划前滚 50 步（不进仿真器），再由一个小预测头从每个"
+                         "“想象出的”潜状态读出 <b>回合时间进度</b> p∈[0,1]。预测头的训练标签是演示帧在回合内的归一化"
+                         "时间占比，所以 p 是任务进度的<i>时间</i>代理量。CEM 最大化想象最后 3 步的均值。这类读出值与"
+                         "真实结局的相关性很弱（+0.09）——这正是本仓库要说明的问题。"),
         "t_arms": "各组", "t_arm": "组", "t_n": "n", "t_success": "成功", "t_rate": "成功率", "t_ci": "95% CI",
         "t_paired": "配对检验（exact McNemar）", "t_comparison": "对比", "t_delta": "差值",
         "t_impr": "改善/变差", "t_p": "p",
@@ -431,7 +443,8 @@ def _sec_verify(run: Path, arms: dict, t: dict) -> str:
         C = np.concatenate(curves, axis=0)
         curve_html = (f'<div class="panel"><h3>{html.escape(t["p_curve"])}</h3>'
                       f'<div class="sub" style="margin:0 0 8px">{html.escape(t["p_curve_sub"])}</div>'
-                      f'{_curve(C.mean(0), C.std(0), t)}</div>')
+                      f'{_curve(C.mean(0), C.std(0), t)}'
+                      f'<div class="note">{t["p_curve_note"]}</div></div>')
 
     rows = []
     for a in names:

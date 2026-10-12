@@ -33,7 +33,16 @@ still an interpretable result:
 ## Imagination (CEM)
 
 * Latent world model: encoder 96×96 agent view → z (128-d); MLP transition on
-  `(z, a)`; progress head `z → p ∈ [0,1]` trained on normalized episode time.
+  `(z, a)`; progress head `z → p ∈ [0,1]`.
+* **What "imagined progress" is.** The head is trained on demonstration frames
+  with the label `frame_index / max_frame_index` inside the episode — i.e.
+  normalised **episode time**, used as a proxy for task progress. At imagination
+  time the world model rolls a candidate plan forward 50 steps in *latent* space
+  (the simulator is never queried) and the head reads `p` from each imagined
+  latent. "Imagined progress" is therefore the model's **own** read-out, not a
+  success signal: a policy that circles or stalls can look mid-episode to it.
+  The measured correlation between imagined-progress gain and real outcome
+  change is only **+0.09**, which is the finding this repository is about.
 * Search: CEM in action space, horizon 50 (matching the policy chunk), seeded
   with the base policy's own chunk.
 * **Trust region.** The search is bounded to `base ± 0.5σ` *per action
