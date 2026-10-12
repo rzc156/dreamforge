@@ -186,6 +186,19 @@ def finetune(cfg: FinetuneConfig, log=print) -> dict:
                "minutes": round((time.time() - t0) / 60, 1)}
     if not cfg.smoke:
         policy.save_pretrained(out_dir)
+        # the processor pipelines (normalization stats) must ship with the
+        # checkpoint, otherwise loading it fails with a migration error
+        try:
+            pre.save_pretrained(out_dir)
+            _post.save_pretrained(out_dir)
+        except Exception as exc:  # pragma: no cover - fall back to copying
+            log(f"  processor save failed ({exc}); copying from base policy")
+            import glob
+            import shutil
+
+            for pat in ("policy_preprocessor*", "policy_postprocessor*"):
+                for f in glob.glob(str(Path(cfg.policy_path) / pat)):
+                    shutil.copy(f, Path(out_dir) / Path(f).name)
         (out_dir / "finetune_summary.json").write_text(json.dumps(summary, indent=2))
         print("saved ->", out_dir)
     return summary
