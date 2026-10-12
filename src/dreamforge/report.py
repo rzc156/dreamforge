@@ -14,6 +14,8 @@ import argparse
 import json
 from pathlib import Path
 
+import numpy as np
+
 from .stats import mcnemar_exact, paired_table, proportion_ci_95
 
 __all__ = ["make_report"]
@@ -46,10 +48,13 @@ def make_report(run_dir: str, out_file: str | None = None) -> str:
     v_dir = run / "verify"
     if v_dir.exists():
         per_arm: dict[str, dict[tuple[str, int], bool]] = {}
+        rows: dict[tuple[str, int], dict] = {}
         for arm in ("none", "imagined", "random"):
             recs = _load_jsonl(v_dir / f"{arm}.jsonl")
             if recs:
                 per_arm[arm] = {(r["file"], int(r["decision"])): bool(r["success"]) for r in recs}
+                for r in recs:
+                    rows.setdefault((r["file"], int(r["decision"])), {})[arm] = r
         if per_arm:
             lines += ["## Verify: do imagined corrections change outcomes?", "",
                       "| arm | n | success | 95% CI |", "|---|---|---|---|"]
@@ -65,6 +70,48 @@ def make_report(run_dir: str, out_file: str | None = None) -> str:
                                  f"({tab.a_only} improve / {tab.b_only} worsen, "
                                  f"{tab.n_pairs} paired states), exact McNemar p = {p:.4f}")
             lines.append("")
+
+            # --- does the world model's own score predict real value? ---
+            pairs = [(r["imagined"]["wm_best_score"] - r["imagined"]["wm_init_score"],
+                      float(r["imagined"]["success"]) - float(r["none"]["success"]))
+                     for r in rows.values() if "imagined" in r and "none" in r]
+            if len(pairs) >= 5:
+                gains = np.asarray([p[0] for p in pairs])
+                deltas = np.asarray([p[1] for p in pairs])
+                lines += ["### Does imagined progress predict real value?", "",
+                          f"- paired states with both arms: **{len(pairs)}**",
+                          f"- mean WM gain (best - init): {gains.mean():+.3f} "
+                          f"(sd {gains.std():.3f})",
+                          f"- mean real delta (imagined - none): {deltas.mean():+.3f}",
+                          f"- correlation(WM gain, real delta): {np.corrcoef(gains, deltas)[0, 1]:+.3f}"]
+                if (deltas != 0).any():
+                    hi = gains >= np.median(gains)
+                    lines.append(f"- real delta for high-WM-gain states: {deltas[hi].mean():+.3f} "
+                                 f"(n={int(hi.sum())}), low: {deltas[~hi].mean():+.3f} "
+                                 f"(n={int((~hi).sum())})")
+                lines.append("")
+
+            # --- breakdown by decision step (is late-stage correction easier?) ---
+            if "imagined" in per_arm and "none" in per_arm:
+                buckets: dict[str, list[tuple[bool, bool]]] = {}
+                for key, r in rows.items():
+                    if "imagined" not in r or "none" not in r:
+                        continue
+                    step = int(r["imagined"].get("decision_step", 0))
+                    b = "start" if step == 0 else ("early" if step <= 100 else "late")
+                    buckets.setdefault(b, []).append((bool(r["imagined"]["success"]), bool(r["none"]["success"])))
+                if buckets:
+                    lines += ["### By decision step", "",
+                              "| bucket | n | imagined | none | delta |", "|---|---|---|---|---|"]
+                    for b in ("start", "early", "late"):
+                        if b in buckets:
+                            v = buckets[b]
+                            n = len(v)
+                            ci = sum(x for x, _ in v) / n
+                            cn = sum(y for _, y in v) / n
+                            lines.append(f"| {b} | {n} | {100 * ci:.0f}% | {100 * cn:.0f}% | "
+                                         f"{100 * (ci - cn):+.0f}pp |")
+                    lines.append("")
 
     # ---------- policy eval ----------
     evals = sorted(run.glob("eval_*.json"))

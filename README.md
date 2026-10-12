@@ -93,9 +93,38 @@ src/dreamforge/
 
 ## Status
 
-🚧 Active research code. The pipeline is being run on LIBERO-Spatial with
-SmolVLA-450M and a 1.4-3.8M-parameter latent world model on a single RTX 5080.
-Results and figures will be added here as runs complete.
+Working pipeline, run on LIBERO-Spatial with SmolVLA-450M and a 3.75M-parameter
+latent world model on a single RTX 5080. Headline numbers so far (see
+[`docs/results.md`](docs/results.md) for the full log and caveats):
+
+* base policy on the 10-episode protocol: **61.0%** (61/100 episodes)
+* `imagine` (CEM, `aso` world model): imagined progress 0.480 → 0.516
+  (mean gain +0.041 over 48 failure states in the pilot pass)
+* `verify` (paired replay, pilot pass, n = 48 states):
+
+  | arm | success | 95% CI |
+  |---|---|---|
+  | none | 14.6% | [7.2, 27.2] |
+  | **imagined** | **33.3%** | [21.7, 47.5] |
+  | random | 6.2% | [2.1, 16.8] |
+
+  imagined vs none **+18.8pp, p = 0.0225**; imagined vs random **+27.1pp,
+  p = 0.0002** (exact McNemar, paired on identical saved states).
+* fine-tuning on imagined corrections and the paired policy evaluation are
+  running; results are appended to `docs/results.md`.
+
+## Diagnostics first
+
+Imagination is only meaningful if the world model responds to actions. The
+repo ships a pre-flight check:
+
+```bash
+python -m dreamforge diagnose --mine runs/main/mine --wms base aso
+```
+
+On this stack the unregularised checkpoint scores `std=0.0003` across random
+plans (it ignores actions — the "action vacancy" phenomenon), while the
+action-sensitivity checkpoint scores `std=0.0215`. All results use the latter.
 
 ## Citation / attribution
 

@@ -123,7 +123,7 @@ def verify(cfg: VerifyConfig, log=print) -> dict:
         env.reset(seed=cfg.seed)          # ensures the underlying robosuite env exists
         env_by_name[name] = env
         task_desc_by_name[name] = task_description(env)
-        horizon_by_name[name] = env_horizon(env)
+        horizon_by_name[name] = env_horizon(env, cfg.task)
 
     done_sets = {arm: _load_done(out_dir / f"{arm}.jsonl") for arm in cfg.arms}
     handles = {arm: (out_dir / f"{arm}.jsonl").open("a") for arm in cfg.arms}

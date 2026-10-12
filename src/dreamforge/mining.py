@@ -19,8 +19,8 @@ from pathlib import Path
 import numpy as np
 import torch
 
-from .envs import (env_horizon, is_success, make_task_envs, raw_env, save_sim_state,
-                   step_checked, task_description)
+from .envs import (env_horizon, make_task_envs, save_sim_state, step_checked,
+                   task_description)
 from .policy import SmolVLABundle, load_smolvla
 
 __all__ = ["mine", "MineConfig"]
@@ -60,7 +60,7 @@ def _agentview96(obs: dict, device: str, size: int) -> np.ndarray:
 def _rollout_episode(bundle: SmolVLABundle, gym_env, task_desc: str, seed: int,
                      cfg: MineConfig) -> dict:
     obs, _ = gym_env.reset(seed=seed)
-    horizon = env_horizon(gym_env)
+    horizon = env_horizon(gym_env, cfg.task)
     budget = cfg.max_steps or horizon
 
     decision_steps: list[int] = []

@@ -13,7 +13,7 @@ from pathlib import Path
 
 import numpy as np
 
-from .envs import is_success, make_task_envs, step_checked, task_description
+from .envs import env_horizon, make_task_envs, step_checked, task_description
 from .paths import DEFAULTS
 from .policy import SmolVLABundle, load_smolvla
 
@@ -68,7 +68,7 @@ def evaluate(cfg: EvalConfig, log=print) -> dict:
         desc = task_description(gym_env)
         for ep in range(cfg.episodes):
             seed = cfg.seed * 100000 + task_id * 1000 + ep
-            budget = cfg.max_steps or 10000
+            budget = cfg.max_steps or env_horizon(gym_env, cfg.task)
             success, length = _rollout(bundle, gym_env, desc, seed, cfg.chunk_exec, budget)
             episodes.append({"task": name, "task_id": task_id, "episode": ep,
                              "seed": seed, "success": success, "length": length})

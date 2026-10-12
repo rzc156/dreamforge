@@ -16,7 +16,7 @@ Key facts (verified on the target machine, lerobot 0.6.1 / robosuite 1.4.0):
 from __future__ import annotations
 
 import os
-from typing import Any, Iterator
+from typing import Any
 
 os.environ.setdefault("MUJOCO_GL", "egl")
 os.environ.setdefault("SDL_VIDEODRIVER", "dummy")
@@ -169,11 +169,27 @@ def is_success(info: dict) -> bool:
     return bool(v)
 
 
-def env_horizon(gym_env: Any) -> int:
-    """Max steps per episode for this env (LIBERO uses 280-520)."""
+_LIBERO_MAX_STEPS = {
+    "libero_spatial": 280,
+    "libero_object": 280,
+    "libero_goal": 300,
+    "libero_10": 520,
+    "libero_long": 520,
+    "libero_90": 400,
+}
+
+
+def env_horizon(gym_env: Any, task: str | None = None) -> int:
+    """Max steps per episode under the standard LIBERO protocol.
+
+    The raw robosuite env reports horizon=1000 (its default); LIBERO evaluation
+    caps episodes per suite (280/300/400/520).  We follow the LIBERO convention.
+    """
+    if task in _LIBERO_MAX_STEPS:
+        return _LIBERO_MAX_STEPS[task]
     inner = inner_env(gym_env)
     for attr in ("horizon", "episode_length", "max_episode_steps"):
         v = getattr(inner, attr, None)
-        if isinstance(v, (int, float)) and v > 0:
+        if isinstance(v, (int, float)) and 0 < v < 1000:
             return int(v)
     return 300
