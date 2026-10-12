@@ -43,3 +43,16 @@ def test_cem_respects_bounds():
                                         low=(-1.0, -1.0), high=(1.0, 1.0)), device="cpu")
     res = cem.optimize(torch.zeros(1, 4), init_mean=torch.zeros(4, 2))
     assert res.actions.min() >= -1.0 - 1e-6 and res.actions.max() <= 1.0 + 1e-6
+
+
+def test_cem_trust_region():
+    """Per-dimension trust region keeps the plan near the seed plan."""
+    torch.manual_seed(0)
+    wm = _FakeWM()
+    head = ProgressHead(latent_dim=4)
+    base = torch.zeros(6, 2)
+    base[:, 0] = 0.5
+    cem = ActionCEM(wm, head, CEMConfig(horizon=6, population=32, elites=4, iters=3,
+                                        delta_per_dim=(0.05, 0.05)), device="cpu")
+    res = cem.optimize(torch.zeros(1, 4), init_mean=base)
+    assert (res.actions - base).abs().max() <= 0.05 + 1e-6
