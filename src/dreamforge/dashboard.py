@@ -137,8 +137,9 @@ STRINGS: dict[str, dict[str, str]] = {
 
 CSS = """
 :root{
-  --bg:#070b14; --bg2:#0b1220; --card:#0f1727; --line:#1d2c45; --line2:#27395a;
-  --fg:#e9f0fb; --muted:#93a7c4; --faint:#6b81a1;
+  --bg:#070b14; --bg2:#0b1220; --card:#0f1727; --line:#22314c; --line2:#31456b;
+  --grid:#2b3d59;
+  --fg:#eef4ff; --muted:#b6c8e2; --faint:#94aac9;
   --blue:#3ba7ff; --green:#7ee787; --orange:#ff7a59; --violet:#c792ea; --grey:#8b9bb4;
 }
 *{box-sizing:border-box}
@@ -156,13 +157,13 @@ body{background:radial-gradient(1200px 700px at 12% -8%, #12283f 0%, var(--bg) 5
   border:1px solid transparent;cursor:pointer;user-select:none;transition:.15s}
 .langswitch label:hover{color:var(--fg)}
 #lang-en:checked ~ .langswitch label[for="lang-en"],
-#lang-zh:checked ~ .langswitch label[for="lang-zh"]{color:#cfe6ff;background:rgba(59,167,255,.16);border-color:#2a5d8f}
+#lang-zh:checked ~ .langswitch label[for="lang-zh"]{color:#dbecff;background:rgba(59,167,255,.22);border-color:#3f7bb5}
 #lang-en:checked ~ .content .lang-zh{display:none}
 #lang-zh:checked ~ .content .lang-en{display:none}
 @media (max-width:720px){.langswitch{position:static;margin:0 0 14px auto}}
 
 .hero{display:flex;flex-wrap:wrap;gap:22px;align-items:flex-end;justify-content:space-between;
-      border:1px solid var(--line);background:linear-gradient(180deg,#0e1a2c,#0b1220);
+      border:1px solid var(--line);background:linear-gradient(180deg,#101d31,#0b1220);
       border-radius:18px;padding:26px 28px;position:relative;overflow:hidden}
 .hero:before{content:"";position:absolute;inset:-40% 40% 40% -10%;
   background:radial-gradient(400px 240px at 30% 30%, rgba(59,167,255,.25), transparent 70%);}
@@ -170,58 +171,80 @@ body{background:radial-gradient(1200px 700px at 12% -8%, #12283f 0%, var(--bg) 5
 .spark{width:46px;height:46px;flex:0 0 46px}
 h1{margin:0;font-size:30px;letter-spacing:-.5px}
 .tagline{color:var(--muted);margin-top:4px}
-.meta{color:var(--faint);font-size:12.5px;z-index:1;text-align:right}
-.meta code{color:var(--blue)}
-h2{font-size:16px;letter-spacing:.2px;margin:38px 0 12px;color:#cfe0f7;
+.meta{color:var(--faint);font-size:13px;z-index:1;text-align:right;line-height:1.7}
+.meta code{color:#8fd0ff}
+h2{font-size:16px;letter-spacing:.2px;margin:38px 0 12px;color:#d8e6fa;
    text-transform:uppercase;font-weight:700}
 h2 .n{color:var(--faint);font-weight:600;margin-right:8px}
 .sub{color:var(--muted);margin:-4px 0 14px}
 .grid{display:grid;gap:14px}
 .stats{grid-template-columns:repeat(auto-fit,minmax(178px,1fr))}
 .cards{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
-.card{border:1px solid var(--line);background:linear-gradient(180deg,#101a2c,#0d1626);
+.card{border:1px solid var(--line);background:linear-gradient(180deg,#111c30,#0d1626);
       border-radius:14px;padding:16px 16px 14px}
-.card .k{color:var(--faint);font-size:12.5px;letter-spacing:.03em;text-transform:uppercase}
-.card .v{font-size:26px;font-weight:700;margin:6px 0 2px;letter-spacing:-.4px}
+.card .k{color:var(--muted);font-size:12.5px;letter-spacing:.03em;text-transform:uppercase;font-weight:600}
+.card .v{font-size:27px;font-weight:700;margin:6px 0 2px;letter-spacing:-.4px;color:#ffffff}
 .card .d{color:var(--muted);font-size:13px}
-.card.hl{border-color:#2a5d8f;box-shadow:0 0 0 1px rgba(59,167,255,.12),0 12px 30px -22px rgba(59,167,255,.55)}
-.card.bad{border-color:#7a3b2a;box-shadow:0 0 0 1px rgba(255,122,89,.12)}
-.card.good{border-color:#2f6b3a}
-.panel{border:1px solid var(--line);background:linear-gradient(180deg,#0f1929,#0c1422);
+.card.hl{border-color:#3a72a6;box-shadow:0 0 0 1px rgba(59,167,255,.18),0 12px 30px -22px rgba(59,167,255,.6)}
+.card.bad{border-color:#945139;box-shadow:0 0 0 1px rgba(255,122,89,.16)}
+.card.good{border-color:#3c8a4c}
+.panel{border:1px solid var(--line);background:linear-gradient(180deg,#111c30,#0c1422);
        border-radius:16px;padding:18px}
 table{width:100%;border-collapse:collapse;font-size:14px}
 th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left}
-th{color:var(--faint);font-weight:600;font-size:12.5px;text-transform:uppercase;letter-spacing:.04em}
+th{color:var(--muted);font-weight:700;font-size:12.5px;text-transform:uppercase;letter-spacing:.04em}
 tr:last-child td{border-bottom:none}
 td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
 .pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12px;border:1px solid var(--line2);color:var(--muted)}
-.pill.b{color:#9fd0ff;border-color:#2a5d8f;background:rgba(59,167,255,.08)}
-.pill.o{color:#ffc79c;border-color:#7a4a2f;background:rgba(255,122,89,.09)}
-.pill.g{color:#9fe8ac;border-color:#2f6b3a;background:rgba(126,231,135,.08)}
-.note{color:var(--faint);font-size:12.5px;margin-top:10px}
-h3{margin:0 0 6px;font-size:14px}
+.pill.b{color:#a9dbff;border-color:#3a72a6;background:rgba(59,167,255,.12)}
+.pill.o{color:#ffcfae;border-color:#94513a;background:rgba(255,122,89,.13)}
+.pill.g{color:#b3f2bf;border-color:#3c8a4c;background:rgba(126,231,135,.12)}
+.note{color:var(--faint);font-size:13px;margin-top:10px}
+h3{margin:0 0 6px;font-size:14px;color:#dce8f9}
 .flow{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch}
-.step{flex:1 1 150px;border:1px solid var(--line);border-radius:12px;padding:12px 13px;background:#0d1626}
-.step .s{color:var(--faint);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase}
-.step .t{font-weight:700;margin:2px 0 4px}
+.step{flex:1 1 150px;border:1px solid var(--line);border-radius:12px;padding:12px 13px;background:#111c30}
+.step .s{color:var(--faint);font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+.step .t{font-weight:700;margin:2px 0 4px;color:#ffffff}
 .step .x{color:var(--muted);font-size:12.5px}
-.arrow{align-self:center;color:#33507a;font-size:18px}
-.verdict{border-left:3px solid var(--orange);background:linear-gradient(90deg,rgba(255,122,89,.08),transparent 60%);
-         border-radius:0 12px 12px 0;padding:14px 18px;color:#ffe3d7}
-.verdict b{color:#fff}
-footer{color:var(--faint);font-size:12.5px;margin-top:44px;border-top:1px solid var(--line);padding-top:16px}
+.arrow{align-self:center;color:#4b6b98;font-size:18px}
+.verdict{border-left:3px solid var(--orange);background:linear-gradient(90deg,rgba(255,122,89,.1),transparent 60%);
+         border-radius:0 12px 12px 0;padding:14px 18px;color:#ffeadf;font-size:15px}
+.verdict b{color:#ffffff}
+footer{color:var(--faint);font-size:13px;margin-top:44px;border-top:1px solid var(--line);padding-top:16px}
 a{color:var(--blue);text-decoration:none}
-code{font-family:'SFMono-Regular',Consolas,'Liberation Mono',monospace;font-size:.92em;color:#9fd0ff}
+a:hover{text-decoration:underline}
+code{font-family:'SFMono-Regular',Consolas,'Liberation Mono',monospace;font-size:.92em;color:#8fd0ff}
+
+/* inline SVG charts follow the theme */
+.svg-grid{stroke:var(--grid);stroke-width:1;stroke-dasharray:3 4}
+.svg-ax{fill:var(--faint);font-size:11.5px}
+.svg-cat{fill:var(--muted);font-size:12.5px}
+.svg-val{fill:var(--fg);font-size:12.5px;font-weight:700}
+.svg-whisk{stroke:var(--fg);stroke-width:1.4}
+
 @media (prefers-color-scheme: light){
-  :root{--bg:#f6f8fc;--bg2:#eef2f9;--card:#fff;--line:#e2e8f2;--line2:#cfd9ea;
-        --fg:#0e1726;--muted:#4d5f7a;--faint:#7488a5}
-  body{background:radial-gradient(1000px 600px at 10% -10%, #e8f1ff 0%, var(--bg) 60%), var(--bg)}
-  .hero{background:linear-gradient(180deg,#ffffff,#f4f8ff)}
-  .card{background:#fff}.panel{background:#fff}.step{background:#fbfcff}
-  h2{color:#22304a}.verdict{color:#7a3018}
-  .langswitch{background:rgba(255,255,255,.75)}
+  :root{--bg:#f4f7fc;--bg2:#eef2f9;--card:#ffffff;--line:#dde5f1;--line2:#c2cfe3;
+        --grid:#d3ddec;
+        --fg:#0a1322;--muted:#33465f;--faint:#4f6484}
+  body{background:radial-gradient(1000px 600px at 10% -10%, #e4efff 0%, var(--bg) 60%), var(--bg)}
+  .hero{background:linear-gradient(180deg,#ffffff,#f2f7ff)}
+  .card,.panel{background:#fff}.step{background:#f8fafe}
+  .card .v,.step .t,.verdict b{color:#0a1322}
+  h2{color:#16233a}h3{color:#1d2c45}
+  .langswitch{background:rgba(255,255,255,.85)}
   #lang-en:checked ~ .langswitch label[for="lang-en"],
-  #lang-zh:checked ~ .langswitch label[for="lang-zh"]{color:#1b4c7e}
+  #lang-zh:checked ~ .langswitch label[for="lang-zh"]{color:#12456f;background:rgba(59,167,255,.18);border-color:#8fbdec}
+  code,a{color:#0b5ea8}
+  .meta code{color:#0b5ea8}
+  .verdict{color:#7d2c12;background:linear-gradient(90deg,rgba(255,122,89,.12),transparent 60%)}
+  .pill.b{color:#12456f;background:rgba(59,167,255,.14);border-color:#a8cdf0}
+  .pill.o{color:#8a3714;background:rgba(255,122,89,.14);border-color:#f0bda6}
+  .pill.g{color:#1c5f2c;background:rgba(126,231,135,.16);border-color:#a9dcb4}
+  .arrow{color:#9db2ce}
+  .svg-val{fill:#0a1322}
+  .svg-cat{fill:#33465f}
+  .svg-ax{fill:#4f6484}
+  .svg-whisk{stroke:#0a1322}
 }
 """
 
@@ -257,19 +280,19 @@ def _bars(labels, values, los, his, colors, width=520, height=210, ymax=1.0):
         if g > ymax:
             continue
         y = pad_t + ih * (1 - g / ymax)
-        p.append(f'<line x1="{pad_l}" y1="{y:.1f}" x2="{width-pad_r}" y2="{y:.1f}" stroke="#26364f" stroke-width="1" stroke-dasharray="3 4"/>')
-        p.append(f'<text x="{pad_l-8}" y="{y+4:.1f}" font-size="11" fill="#6b81a1" text-anchor="end">{int(g*100)}%</text>')
+        p.append(f'<line class="svg-grid" x1="{pad_l}" y1="{y:.1f}" x2="{width-pad_r}" y2="{y:.1f}"/>')
+        p.append(f'<text class="svg-ax" x="{pad_l-8}" y="{y+4:.1f}" text-anchor="end">{int(g*100)}%</text>')
     for i, (lab, v, lo, hi, c) in enumerate(zip(labels, values, los, his, colors)):
         cx = pad_l + iw * (i + 0.5) / n
         x, bh = cx - bw / 2, ih * (v / ymax)
         y = pad_t + ih - bh
         p.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{bw:.1f}" height="{bh:.1f}" rx="6" fill="{c}" fill-opacity="0.85"/>')
         ylo, yhi = pad_t + ih * (1 - lo / ymax), pad_t + ih * (1 - hi / ymax)
-        p.append(f'<line x1="{cx:.1f}" y1="{yhi:.1f}" x2="{cx:.1f}" y2="{ylo:.1f}" stroke="#dfe9f7" stroke-width="1.4"/>')
+        p.append(f'<line class="svg-whisk" x1="{cx:.1f}" y1="{yhi:.1f}" x2="{cx:.1f}" y2="{ylo:.1f}"/>')
         for yy in (ylo, yhi):
-            p.append(f'<line x1="{cx-6:.1f}" y1="{yy:.1f}" x2="{cx+6:.1f}" y2="{yy:.1f}" stroke="#dfe9f7" stroke-width="1.4"/>')
-        p.append(f'<text x="{cx:.1f}" y="{y-6:.1f}" font-size="12.5" font-weight="700" fill="#e9f0fb" text-anchor="middle">{v:.1%}</text>')
-        p.append(f'<text x="{cx:.1f}" y="{height-12}" font-size="12.5" fill="#93a7c4" text-anchor="middle">{html.escape(str(lab))}</text>')
+            p.append(f'<line class="svg-whisk" x1="{cx-6:.1f}" y1="{yy:.1f}" x2="{cx+6:.1f}" y2="{yy:.1f}"/>')
+        p.append(f'<text class="svg-val" x="{cx:.1f}" y="{y-6:.1f}" text-anchor="middle">{v:.1%}</text>')
+        p.append(f'<text class="svg-cat" x="{cx:.1f}" y="{height-12}" text-anchor="middle">{html.escape(str(lab))}</text>')
     p.append("</svg>")
     return "".join(p)
 
@@ -283,15 +306,15 @@ def _curve(mean, sd, t, width=520, height=210, color="#3ba7ff"):
     p = [f'<svg viewBox="0 0 {width} {height}" width="100%" height="{height}" role="img">']
     for g in (0.0, 0.25, 0.5, 0.75, 1.0):
         y = Y(g)
-        p.append(f'<line x1="{pad_l}" y1="{y:.1f}" x2="{width-pad_r}" y2="{y:.1f}" stroke="#26364f" stroke-width="1" stroke-dasharray="3 4"/>')
-        p.append(f'<text x="{pad_l-8}" y="{y+4:.1f}" font-size="11" fill="#6b81a1" text-anchor="end">{int(g*100)}%</text>')
+        p.append(f'<line class="svg-grid" x1="{pad_l}" y1="{y:.1f}" x2="{width-pad_r}" y2="{y:.1f}"/>')
+        p.append(f'<text class="svg-ax" x="{pad_l-8}" y="{y+4:.1f}" text-anchor="end">{int(g*100)}%</text>')
     up = " ".join(f"{x:.1f},{Y(mean[i]+sd[i]):.1f}" for i, x in enumerate(xs))
     dn = " ".join(f"{x:.1f},{Y(mean[i]-sd[i]):.1f}" for i, x in reversed(list(enumerate(xs))))
     p.append(f'<polygon points="{up} {dn}" fill="{color}" fill-opacity="0.18"/>')
     path = " ".join(("M" if i == 0 else "L") + f"{x:.1f},{Y(mean[i]):.1f}" for i, x in enumerate(xs))
     p.append(f'<path d="{path}" fill="none" stroke="{color}" stroke-width="2.2"/>')
-    p.append(f'<text x="{width-pad_r}" y="{height-10}" font-size="11" fill="#6b81a1" text-anchor="end">{html.escape(t["axis_step"])}</text>')
-    p.append(f'<text x="{pad_l}" y="{height-10}" font-size="11" fill="#6b81a1">0</text>')
+    p.append(f'<text class="svg-ax" x="{width-pad_r}" y="{height-10}" text-anchor="end">{html.escape(t["axis_step"])}</text>')
+    p.append(f'<text class="svg-ax" x="{pad_l}" y="{height-10}">0</text>')
     p.append("</svg>")
     return "".join(p)
 
