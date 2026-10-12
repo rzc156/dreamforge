@@ -219,7 +219,7 @@ code{font-family:'SFMono-Regular',Consolas,'Liberation Mono',monospace;font-size
 .svg-grid{stroke:var(--grid);stroke-width:1;stroke-dasharray:3 4}
 .svg-ax{fill:var(--faint);font-size:11.5px}
 .svg-cat{fill:var(--muted);font-size:12.5px}
-.svg-val{fill:var(--fg);font-size:12.5px;font-weight:700}
+.svg-val{fill:var(--fg);font-size:12.5px;font-weight:700;paint-order:stroke;stroke:var(--card);stroke-width:3.2px;stroke-linejoin:round}
 .svg-whisk{stroke:var(--fg);stroke-width:1.4}
 
 @media (prefers-color-scheme: light){
@@ -271,7 +271,7 @@ def _rate(d: dict) -> tuple[int, int]:
 
 def _bars(labels, values, los, his, colors, width=520, height=210, ymax=1.0):
     n = len(values)
-    pad_l, pad_r, pad_t, pad_b = 44, 14, 18, 34
+    pad_l, pad_r, pad_t, pad_b = 46, 14, 28, 34
     iw = width - pad_l - pad_r
     ih = height - pad_t - pad_b
     bw = iw / max(n, 1) * 0.52
@@ -291,7 +291,9 @@ def _bars(labels, values, los, his, colors, width=520, height=210, ymax=1.0):
         p.append(f'<line class="svg-whisk" x1="{cx:.1f}" y1="{yhi:.1f}" x2="{cx:.1f}" y2="{ylo:.1f}"/>')
         for yy in (ylo, yhi):
             p.append(f'<line class="svg-whisk" x1="{cx-6:.1f}" y1="{yy:.1f}" x2="{cx+6:.1f}" y2="{yy:.1f}"/>')
-        p.append(f'<text class="svg-val" x="{cx:.1f}" y="{y-6:.1f}" text-anchor="middle">{v:.1%}</text>')
+        # value label sits above the *upper whisker*, never on top of it
+        ty = max(pad_t + 12, min(y, yhi) - 8)
+        p.append(f'<text class="svg-val" x="{cx:.1f}" y="{ty:.1f}" text-anchor="middle">{v:.1%}</text>')
         p.append(f'<text class="svg-cat" x="{cx:.1f}" y="{height-12}" text-anchor="middle">{html.escape(str(lab))}</text>')
     p.append("</svg>")
     return "".join(p)
@@ -419,7 +421,7 @@ def _sec_verify(run: Path, arms: dict, t: dict) -> str:
     for a in names:
         k, n = _rate(arms[a]); lo, hi = wilson_ci(k, n)
         vals.append(k / n); los.append(lo); his.append(hi)
-    bars = _bars(names, vals, los, his, [_ARM_COLOR[a] for a in names], ymax=max(0.35, max(his) * 1.15))
+    bars = _bars(names, vals, los, his, [_ARM_COLOR[a] for a in names], ymax=max(0.35, max(his) * 1.28))
 
     curves = []
     for f in sorted((run / "imagine").glob("*.npz")):
@@ -506,7 +508,7 @@ def _sec_eval(run: Path, t: dict) -> str:
                          f"<td class='num'>{tt.a_only} / {tt.b_only}</td>"
                          f"<td class='num'>{mcnemar_exact(tt.a_only, tt.b_only):.3f}</td></tr>")
     bars = _bars(names, vals, los, his, [_POLICY_COLOR[i % len(_POLICY_COLOR)] for i in range(len(names))],
-                 ymax=max(0.8, max(his) * 1.15))
+                 ymax=max(0.8, max(his) * 1.28))
     return (
         f'<h2><span class="n">04</span>{html.escape(t["h_eval"])}</h2>'
         f'<p class="sub">{html.escape(t["eval_sub"])}</p>'
