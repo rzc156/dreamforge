@@ -46,6 +46,32 @@ def make_report(run_dir: str, out_file: str | None = None) -> str:
 
     # ---------- verify ----------
     v_dir = run / "verify"
+    v_dirs = ([v_dir] if v_dir.exists() else []) + [p for p in sorted(run.glob("verify_*")) if p.is_dir()]
+    if len(v_dirs) > 1:
+        lines += ["## Budget comparison (same mined states, different correction budgets)", "",
+                  "| verify dir | n | none | imagined | random | imagined-none | imagined-random |",
+                  "|---|---|---|---|---|---|---|"]
+        for vd in v_dirs:
+            arms_d: dict[str, dict[tuple[str, int], bool]] = {}
+            for arm in ("none", "imagined", "random"):
+                recs = _load_jsonl(vd / f"{arm}.jsonl")
+                if recs:
+                    arms_d[arm] = {(r["file"], int(r["decision"])): bool(r["success"]) for r in recs}
+            if "imagined" not in arms_d:
+                continue
+            n = len(arms_d["imagined"])
+            def rate(a):
+                return f"{100 * np.mean(list(arms_d[a].values())):.1f}%" if a in arms_d else "—"
+            def vs(a, b):
+                if a in arms_d and b in arms_d:
+                    t = paired_table(arms_d[a], arms_d[b])
+                    return f"{100 * t.delta():+.1f}pp (p={mcnemar_exact(t.a_only, t.b_only):.3f})"
+                return "—"
+            lines.append(f"| {vd.name} | {n} | {rate('none')} | {rate('imagined')} | {rate('random')} | "
+                         f"{vs('imagined', 'none')} | {vs('imagined', 'random')} |")
+        lines += ["", "_Budgets: `verify` = 0.5σ per-dimension trust region; `verify_big` = "
+                  "unconstrained CEM (dataset-range clipping)._", ""]
+
     if v_dir.exists():
         per_arm: dict[str, dict[tuple[str, int], bool]] = {}
         rows: dict[tuple[str, int], dict] = {}

@@ -115,10 +115,15 @@ def imagine(cfg: ImagineConfig, log=print) -> dict:
             init_scores.append(res.init_score)
             curves.append(np.asarray(res.progress_curve, dtype=np.float32))
             histories.append(np.asarray(res.history, dtype=np.float32))
-            # control: random perturbation of the *base chunk* within the same per-dim budget
+            # control: random perturbation of the *base chunk* within the same budget,
+            # or unconstrained uniform sampling over the dataset range when the search
+            # itself is unconstrained (delta_sigma = 0)
             base = np.asarray(d["chunk_raw"][s], dtype=np.float32)[: cfg.horizon]
-            budget = (scale * cfg.delta_sigma) if cfg.delta_sigma else np.full(7, 0.15, np.float32)
-            rnd = np.clip(base + rng.uniform(-1.0, 1.0, size=base.shape) * budget, low, high)
+            if cfg.delta_sigma:
+                budget = scale * cfg.delta_sigma
+                rnd = np.clip(base + rng.uniform(-1.0, 1.0, size=base.shape) * budget, low, high)
+            else:
+                rnd = rng.uniform(low, high, size=base.shape)
             randoms.append(rnd.astype(np.float32))
         np.savez_compressed(
             out_dir / f.name,
