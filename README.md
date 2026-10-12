@@ -93,25 +93,31 @@ src/dreamforge/
 
 ## Status
 
-Working pipeline, run on LIBERO-Spatial with SmolVLA-450M and a 3.75M-parameter
-latent world model on a single RTX 5080. Headline numbers so far (see
-[`docs/results.md`](docs/results.md) for the full log and caveats):
+Working pipeline, run end to end on LIBERO-Spatial with SmolVLA-450M and a
+3.75M-parameter latent world model on a single RTX 5080. Full log and caveats:
+[`docs/results.md`](docs/results.md).
 
-* base policy on the 10-episode protocol: **61.0%** (61/100 episodes)
-* `imagine` (CEM, `aso` world model): imagined progress 0.480 → 0.516
-  (mean gain +0.041 over 48 failure states in the pilot pass)
-* `verify` (paired replay, pilot pass, n = 48 states):
+| stage | result |
+|---|---|
+| base policy (10-episode protocol, 100 eps) | **61.0%** |
+| mining | 150 episodes → 60 failures → **360 failure states** |
+| `imagine` (CEM + action-sensitive WM) | imagined progress 0.480 → 0.500 (+0.020) |
+| `verify`, 0.5σ corrections (360 states, paired) | none **9.7%** · imagined **13.4%** · random **14.6%** |
+| imagined vs none / vs random | **+3.7pp (p = 0.060)** / **−1.1pp (p = 0.61)** |
+| `ft_all` (imagined corrections + replay) | 57.0% |
+| `ft_replay` (control, replay only) | 58.0% (ft_all vs ft_replay: −1.0pp, p = 1.0) |
 
-  | arm | success | 95% CI |
-  |---|---|---|
-  | none | 14.6% | [7.2, 27.2] |
-  | **imagined** | **33.3%** | [21.7, 47.5] |
-  | random | 6.2% | [2.1, 16.8] |
+**What this says (and does not say).** In the small-correction regime the world
+model changes outcomes a little, but **no more than a random perturbation of
+the same magnitude** — its *direction* carries no measurable value — and
+fine-tuning on those corrections does not beat a replay-only control. A
+follow-up sweep with an unconstrained correction budget (`verify_big`) tests
+whether the model's direction only matters when large deviations are allowed.
 
-  imagined vs none **+18.8pp, p = 0.0225**; imagined vs random **+27.1pp,
-  p = 0.0002** (exact McNemar, paired on identical saved states).
-* fine-tuning on imagined corrections and the paired policy evaluation are
-  running; results are appended to `docs/results.md`.
+This is a deliberately negative/conditional result, and it is the honest
+continuation of the earlier finding that test-time *selection* has near-zero
+headroom: moving imagination from selection to training does not rescue it, at
+least not in this regime.
 
 ## Diagnostics first
 
