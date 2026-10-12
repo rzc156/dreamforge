@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dreamforge"
+version = "0.1.0"
+description = "Turn world-model imagination into corrective training data for robot policies (LIBERO / SmolVLA)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Rao Zhichao" }]
+keywords = ["robotics", "vla", "world-model", "imitation-learning", "libero", "lerobot"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Robotics",
+]
+dependencies = [
+    "numpy>=1.24",
+    "torch>=2.2",
+]
+
+[project.optional-dependencies]
+# Heavy runtime deps live in the user's existing `embodied` conda env.
+# They are listed here for documentation only; pip install of this package
+# does not require them.
+sim = ["lerobot>=0.6.1", "libero", "robosuite", "mujoco"]
+dev = ["pytest>=7"]
+
+[project.scripts]
+dreamforge = "dreamforge.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

@@ -1,0 +1,42 @@
+# dreamforge default configuration
+# These mirror the CLI defaults; edit a copy per run (paths are absolute to the
+# author's environment, override with --flags or DREAMFORGE_* env vars).
+
+paths:
+  policy: /media/rzc/PS3000/embodied-ai/models/smolvla_libero
+  research_results: /home/rzc/embodied-ai/research/results   # world-model checkpoints
+  replay_dataset: /media/rzc/PS3000/embodied-ai/datasets/lerobot_libero
+  action_cache: /media/rzc/PS3000/embodied-ai/datasets/libero_cache/actions.npy
+  run: runs/main
+
+mining:
+  task: libero_spatial
+  episodes: 20
+  chunk_exec: 50          # matches the LIBERO evaluation protocol
+  seed: 0
+
+world_model:
+  checkpoint: aso         # base has near-zero action sensitivity (see docs/protocol.md)
+  image_size: 96
+
+cem:
+  horizon: 50
+  population: 64
+  elites: 8
+  iters: 6
+  init_std: 0.25
+  score_tail: 3
+  action_clip: true       # clip to dataset action min/max
+
+verify:
+  arms: [none, imagined, random]
+  exec_horizon: 16
+
+train:
+  steps: 3000
+  batch_size: 16
+  replay_ratio: 0.5
+  lr: 5.0e-6
+
+eval:
+  episodes: 10

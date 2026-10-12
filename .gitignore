@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.venv/
+
+# runs & artifacts
+runs/
+*.npz
+*.pt
+*.safetensors
+
+# editors
+.vscode/
+.idea/

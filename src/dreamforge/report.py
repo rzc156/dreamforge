@@ -1,0 +1,107 @@
+"""Report -- aggregate verify / eval artifacts into markdown + paired stats.
+
+Usage:
+    python -m dreamforge.report --run runs/main
+Writes runs/main/report.md with:
+  - imagined-score diagnostics (WM init vs best score)
+  - verify table: none / imagined / random success with Wilson CIs and
+    exact McNemar tests (imagined vs none, imagined vs random)
+  - policy eval table when eval_*.json files exist (paired McNemar)
+"""
+from __future__ import annotations
+
+import argparse
+import json
+from pathlib import Path
+
+from .stats import mcnemar_exact, paired_table, proportion_ci_95
+
+__all__ = ["make_report"]
+
+
+def _load_jsonl(p: Path) -> list[dict]:
+    if not p.exists():
+        return []
+    return [json.loads(line) for line in p.read_text().splitlines() if line.strip()]
+
+
+def make_report(run_dir: str, out_file: str | None = None) -> str:
+    run = Path(run_dir)
+    lines: list[str] = ["# dreamforge run report", ""]
+
+    # ---------- imagine diagnostics ----------
+    im_dir = run / "imagine"
+    if (im_dir / "summary.json").exists():
+        s = json.loads((im_dir / "summary.json").read_text())
+        lines += ["## Imagined corrections (world-model side)", "",
+                  f"- world model: `{s.get('wm')}`  context: `{s.get('context')}`",
+                  f"- states imagined: **{s.get('n_states', 0)}**  ({s.get('minutes', 0)} min)", ""]
+        if s.get("episodes"):
+            lines += ["| episode file | states | WM score init -> best |", "|---|---|---|"]
+            for e in s["episodes"]:
+                lines.append(f"| {e['file']} | {e['states']} | {e['mean_init']:.3f} -> {e['mean_best']:.3f} |")
+            lines.append("")
+
+    # ---------- verify ----------
+    v_dir = run / "verify"
+    if v_dir.exists():
+        per_arm: dict[str, dict[tuple[str, int], bool]] = {}
+        for arm in ("none", "imagined", "random"):
+            recs = _load_jsonl(v_dir / f"{arm}.jsonl")
+            if recs:
+                per_arm[arm] = {(r["file"], int(r["decision"])): bool(r["success"]) for r in recs}
+        if per_arm:
+            lines += ["## Verify: do imagined corrections change outcomes?", "",
+                      "| arm | n | success | 95% CI |", "|---|---|---|---|"]
+            for arm, d in per_arm.items():
+                k = sum(d.values())
+                lines.append(f"| {arm} | {len(d)} | {k} | {proportion_ci_95(k, len(d))} |")
+            lines.append("")
+            for a, b in (("imagined", "none"), ("imagined", "random")):
+                if a in per_arm and b in per_arm:
+                    tab = paired_table(per_arm[a], per_arm[b], key="pair")
+                    p = mcnemar_exact(tab.a_only, tab.b_only)
+                    lines.append(f"- **{a} vs {b}**: delta = {100 * tab.delta():+.1f}pp "
+                                 f"({tab.a_only} improve / {tab.b_only} worsen, "
+                                 f"{tab.n_pairs} paired states), exact McNemar p = {p:.4f}")
+            lines.append("")
+
+    # ---------- policy eval ----------
+    evals = sorted(run.glob("eval_*.json"))
+    if evals:
+        lines += ["## Policy evaluation (closed loop)", "", "| policy | n | success | 95% CI |", "|---|---|---|---|"]
+        outcomes: dict[str, dict[tuple[str, int], bool]] = {}
+        for e in evals:
+            d = json.loads(e.read_text())
+            key = Path(d["policy_path"]).name
+            outcomes[key] = {(ep["task"], ep["episode"]): bool(ep["success"]) for ep in d["episodes"]}
+            lines.append(f"| {key} | {d['n']} | {proportion_ci_95(d['successes'], d['n'])} |")
+        lines.append("")
+        names = list(outcomes)
+        for i in range(len(names)):
+            for j in range(i + 1, len(names)):
+                a, b = names[i], names[j]
+                tab = paired_table(outcomes[a], outcomes[b], key="pair")
+                p = mcnemar_exact(tab.a_only, tab.b_only)
+                lines.append(f"- **{a} vs {b}**: delta = {100 * tab.delta():+.1f}pp, "
+                             f"{tab.a_only} win / {tab.b_only} loss / {tab.discordant} discordant, "
+                             f"exact McNemar p = {p:.4f}")
+        lines.append("")
+
+    text = "\n".join(lines)
+    out = Path(out_file) if out_file else run / "report.md"
+    out.write_text(text)
+    print(text)
+    return text
+
+
+def main() -> None:
+    p = argparse.ArgumentParser(description="aggregate run artifacts into a report")
+    p.add_argument("--run", required=True)
+    p.add_argument("--out", default=None)
+    args = p.parse_args()
+    make_report(args.run, args.out)
+
+
+if __name__ == "__main__":
+    main()
