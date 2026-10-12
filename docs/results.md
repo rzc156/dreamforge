@@ -73,27 +73,34 @@ Where the correction helps:
 Late-stage failures are essentially unrecoverable by a 16-step correction,
 which bounds what any world model can be expected to fix.
 
-## W2b — does a bigger correction budget change the story?
+## W2b — targeted corrections (only where correction is possible)
 
-TODO(big budget): the pilot (48 states from 8 episodes, *unconstrained* CEM
-plans clipped only to the dataset range) reported imagined 33.3% vs none 14.6%
-vs random 6.2% (p = 0.0225 / 0.0002) — i.e. large model-guided deviations
-helped while large *random* deviations hurt. `runs/main/verify_big` re-runs
-that unconstrained budget on the same 360 states to test whether the model's
-direction only matters when large deviations are allowed.
+The step breakdown above says the effect lives at episode *starts*, so training
+on all 360 corrections dilutes the useful signal with late corrections that
+change nothing. We therefore build a second dataset with
+`--max-decision-step 50` (start + first decision point, 120 samples) and run
+the same fine-tuning + paired evaluation (`ft_early`). This is a data-targeting
+test, not a new method.
 
-| verify dir | n | none | imagined | random | imagined−none | imagined−random |
-|---|---|---|---|---|---|---|
-| verify (0.5σ) | 360 | 9.4% | 13.6% | 14.7% | +4.2pp (p=0.032) | −1.1pp (p=0.608) |
-| verify_big (unconstrained) | _pending_ | | | | | |
+### An unconstrained-budget sweep is left as future work
+
+The pilot pass (48 states from 8 episodes, *unconstrained* CEM plans clipped
+only to the dataset range) reported imagined 33.3% vs none 14.6% vs random
+6.2% (p = 0.0225 / 0.0002): large model-guided deviations helped while large
+*random* deviations actively hurt, which would mean the model's direction only
+matters when big deviations are allowed. Re-running that budget on all 360
+states is impractical here: with large corrections the hand-off rollouts run
+to the episode cap, making each trial ~20-40 s (vs ~1.5 s), i.e. 6-12 h of
+GPU for the full sweep. It is the first item in `TODO` above any larger claim.
 
 ## W3 — fine-tuning on imagined corrections
 
 | policy | steps | closed-loop success (100 eps, paired) |
 |---|---|---|
 | base `smolvla_libero` | — | **61.0%** [51.2, 70.0] |
-| `ft_all` (imagined corrections + 50% replay) | 3000 | 57.0% [47.2, 66.3] |
+| `ft_all` (all 360 imagined corrections + 50% replay) | 3000 | 57.0% [47.2, 66.3] |
 | `ft_replay` (control: replay only) | 3000 | 58.0% [48.2, 67.2] |
+| `ft_early` (managed corrections from steps ≤ 50, 120 samples) | 3000 | _pending_ |
 
 * base vs `ft_all`: +4.0pp, exact McNemar p = 0.48 (n.s.)
 * base vs `ft_replay`: +3.0pp, p = 0.65 (n.s.)

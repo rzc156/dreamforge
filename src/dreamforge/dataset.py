@@ -35,7 +35,7 @@ __all__ = ["build_dataset", "BuildConfig"]
 class BuildConfig:
     def __init__(self, mine_dir: str, imagine_dir: str, out_dir: str, filter_mode: str = "all",
                  verify_dir: str | None = None, wm_gain: float = 0.05, shard_size: int = 200,
-                 max_samples: int | None = None):
+                 max_samples: int | None = None, max_decision_step: int | None = None):
         self.mine_dir = mine_dir
         self.imagine_dir = imagine_dir
         self.out_dir = out_dir
@@ -44,6 +44,8 @@ class BuildConfig:
         self.wm_gain = wm_gain
         self.shard_size = shard_size
         self.max_samples = max_samples
+        # only keep corrections applied early in the episode (recoverable states)
+        self.max_decision_step = max_decision_step
 
 
 def _load_verify(verify_dir: Path) -> dict[tuple[str, int], dict[str, bool]]:
@@ -120,12 +122,15 @@ def build_dataset(cfg: BuildConfig, log=print) -> dict:
             if cfg.max_samples is not None and n >= cfg.max_samples:
                 break
             keep = True
-            if cfg.filter_mode == "lifted":
-                v = verify.get((f.name, s), {})
-                keep = v.get("imagined", False) and not v.get("none", True)
-            elif cfg.filter_mode == "gained":
-                gain = float(d["wm_best_score"][s]) - float(d["wm_init_score"][s])
-                keep = gain >= cfg.wm_gain
+            if cfg.max_decision_step is not None and int(d["decision_steps"][s]) > cfg.max_decision_step:
+                keep = False
+            if keep:
+                if cfg.filter_mode == "lifted":
+                    v = verify.get((f.name, s), {})
+                    keep = v.get("imagined", False) and not v.get("none", True)
+                elif cfg.filter_mode == "gained":
+                    gain = float(d["wm_best_score"][s]) - float(d["wm_init_score"][s])
+                    keep = gain >= cfg.wm_gain
             if not keep:
                 counts["skipped"] += 1
                 continue
@@ -171,10 +176,13 @@ def main() -> None:
     p.add_argument("--verify-dir", default=None)
     p.add_argument("--wm-gain", type=float, default=0.05)
     p.add_argument("--max-samples", type=int, default=None)
+    p.add_argument("--max-decision-step", type=int, default=None,
+                   help="keep only corrections applied at/earlier than this episode step")
     args = p.parse_args()
     build_dataset(BuildConfig(mine_dir=args.mine, imagine_dir=args.imagine, out_dir=args.out,
                               filter_mode=args.filter_mode, verify_dir=args.verify_dir,
-                              wm_gain=args.wm_gain, max_samples=args.max_samples))
+                              wm_gain=args.wm_gain, max_samples=args.max_samples,
+                              max_decision_step=args.max_decision_step))
 
 
 if __name__ == "__main__":
