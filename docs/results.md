@@ -1,88 +1,136 @@
-# Results (running log)
+# Results
 
-All numbers below come from `runs/` artifacts in this repo and are regenerated
-by `python -m dreamforge.report --run runs/main`.
+Everything below is regenerated from the artifacts in `runs/main` by
+`python -m dreamforge.report --run runs/main` (see `runs/main/report.md`).
 
 ## Setup
 
 * Policy: `lerobot/smolvla_libero` (SmolVLA-450M), unchanged at hand-off.
-* Suite: LIBERO-Spatial (10 tasks), episodes capped at the LIBERO protocol
-  (280 steps; a 50-step chunk may overshoot to ≤330), seeds fixed.
-* World model: latent dynamics (3.75M params, `aso` checkpoint) + progress head.
-* CEM: horizon 50, population 64, 8 elites, 6 iterations, actions clipped to
-  dataset min/max; search seeded with the base policy's own chunk.
+* Suite: LIBERO-Spatial (10 tasks); episodes capped at the LIBERO protocol
+  (280 steps, a 50-step chunk may overshoot to ≤330); fixed seeds.
+* Mining: 150 episodes (10 tasks × 15) → **60 failed episodes → 360 failure
+  states**. Base policy on the standard 10-episode protocol: **61.0%**
+  (61/100).
+* World model: latent dynamics + progress head, 3.75M params, `aso`
+  checkpoint (see W0). CEM horizon 50, population 64, 8 elites, 6 iterations,
+  trust region 0.5σ per action dimension around the policy's own chunk.
 
 ## W0 — pre-flight: the world model must respond to actions
 
-Before trusting imagination, `dreamforge diagnose` measures action response:
+`python -m dreamforge.diagnose --mine runs/main/mine --wms base aso`:
 
-| world model | score std over random plans | action-swap Δprogress | latent swap norm |
+| world model | score std over random plans | action-swap Δprogress | |z0| |
 |---|---|---|---|
-| `base` (1.39M) | 0.0003 | 0.0003 | ≈0 |
-| `aso` (3.75M)  | 0.0215 | 0.0150 | large |
+| `base` (1.39M) | 0.0003 | 0.0003 | 33 |
+| `aso` (3.75M) | 0.0215 | 0.0150 | 14 |
 
-The unregularised model ignores the action entirely (a reproduction of the
-"action vacancy" phenomenon); CEM cannot optimize it. All runs below use `aso`.
+The unregularised model ignores the action almost exactly (a reproduction of
+the *action vacancy* phenomenon); CEM cannot optimise it. All runs use `aso`.
+Takeaway, shipped as a tool: **measure action response before trusting a world
+model for imagination.**
 
-## W1 — imagined corrections improve imagined progress
+## W1 — imagination raises imagined progress
 
-`imagine` (CEM on 48 failure states from 8 failed episodes):
+360 failure states, CEM seeded with the base chunk, 0.5σ trust region:
 
-* mean imagined progress: **0.480 → 0.516** (mean gain **+0.041**, sd 0.025)
-* CEM history rises monotonically within its 6 iterations
+* mean imagined progress: **0.480 → 0.500** (mean gain **+0.020**, sd 0.021)
+* CEM's best score improves monotonically over its 6 iterations
 
-## W2 — imagined corrections have real value in the simulator
+The gain is small — consistent with a policy that is already competent.
 
-`verify`: each saved state is restored exactly (`MjSimState` round-trip) and
-replayed with three arms, then the unchanged policy resumes.
-`none` reproduces the original episode outcome (validated: identical episode
-length on replay), which anchors the comparison.
+## W2 — what imagined corrections are worth in the simulator
 
-| arm | n states | success | 95% Wilson CI |
+Each saved state is restored exactly (`MjSimState` round-trip; the `none` arm
+reproduces the original episode length, which anchors the comparison) and
+replayed with three arms before the unchanged policy resumes.
+
+| arm | n | success | 95% Wilson CI |
 |---|---|---|---|
-| none | 48 | 7 | 14.6% [7.2, 27.2] |
-| **imagined** | 48 | **16** | **33.3% [21.7, 47.5]** |
-| random | 48 | 3 | 6.2% [2.1, 16.8] |
+| none | 360 | 34 | 9.4% [6.8, 12.9] |
+| imagined | 360 | 49 | **13.6% [10.5, 17.5]** |
+| random (same per-dim budget) | 360 | 53 | **14.7% [11.4, 18.8]** |
 
-* **imagined vs none: +18.8pp**, 11 states improve / 2 worsen, exact McNemar
-  **p = 0.0225**
-* **imagined vs random: +27.1pp**, 13 improve / 0 worsen, **p = 0.0002**
+* **imagined vs none: +4.2pp**, 29 states improve / 14 worsen, exact McNemar
+  **p = 0.032** — corrections do have real causal value.
+* **imagined vs random: −1.1pp**, 15 improve / 19 worsen, **p = 0.61** — the
+  world model's *direction* buys nothing over an equal-sized random
+  perturbation. The point estimate even favours random.
 
-Two things stand out:
+Episode-clustered view (states within an episode are correlated, so the
+state-level p-value is optimistic):
 
-1. *Imagination is not just perturbation.* Random action sequences of the same
-   length are worse than doing nothing (6.2% vs 14.6%); the model-optimised
-   corrections are far better than both.
-2. *Imagined progress is a weak predictor of real value* (point correlation
-   +0.12 between WM gain and real delta; high-gain half +20.8pp vs low-gain half
-   +16.7pp). This extends the previous study's conclusion — an offline world
-   model score does not proxy decision quality — from *selection* to
-   *correction*.
+* 60 episodes with paired states; mean per-episode delta **+4.2pp**;
+  **21 better / 30 equal / 9 worse** episodes.
 
-Breakdown by where in the episode the correction is applied:
+Where the correction helps:
 
 | decision step | n | imagined | none | delta |
 |---|---|---|---|---|
-| start (step 0) | 8 | 75% | 25% | +50pp |
-| early (≤100) | 16 | 50% | 25% | +25pp |
-| late (>100) | 24 | 8% | 4% | +4pp |
+| start (step 0) | 60 | 32% | 17% | **+15pp** |
+| early (≤100) | 120 | 23% | 18% | +6pp |
+| late (>100) | 180 | 1% | 2% | −1pp |
 
-Corrections matter most early — late-stage states are often already
-unrecoverable, which also bounds how much a world model can be expected to fix.
+Late-stage failures are essentially unrecoverable by a 16-step correction,
+which bounds what any world model can be expected to fix.
 
-> Caveat: these 48 states come from 8 failed episodes, so states within an
-> episode are correlated and the intervals are optimistic. The numbers are
-> being extended to the full mining run in the next pass.
+## W2b — does a bigger correction budget change the story?
 
-## W3 — training on imagined corrections (in progress)
+TODO(big budget): the pilot (48 states from 8 episodes, *unconstrained* CEM
+plans clipped only to the dataset range) reported imagined 33.3% vs none 14.6%
+vs random 6.2% (p = 0.0225 / 0.0002) — i.e. large model-guided deviations
+helped while large *random* deviations hurt. `runs/main/verify_big` re-runs
+that unconstrained budget on the same 360 states to test whether the model's
+direction only matters when large deviations are allowed.
 
-Datasets built from the same corrections:
+| verify dir | n | none | imagined | random | imagined−none | imagined−random |
+|---|---|---|---|---|---|---|
+| verify (0.5σ) | 360 | 9.4% | 13.6% | 14.7% | +4.2pp (p=0.032) | −1.1pp (p=0.608) |
+| verify_big (unconstrained) | _pending_ | | | | | |
 
-| filter | rule | samples |
+## W3 — fine-tuning on imagined corrections
+
+| policy | steps | closed-loop success (100 eps, paired) |
 |---|---|---|
-| `all` | every imagined correction (no simulator) | 48 |
-| `gained` | world-model score gain ≥ 0.05 (no simulator) | 20 |
-| `lifted` | real replay flipped the outcome (uses simulator) | 11 |
+| base `smolvla_libero` | — | **61.0%** [51.2, 70.0] |
+| `ft_all` (imagined corrections + 50% replay) | 3000 | 57.0% [47.2, 66.3] |
+| `ft_replay` (control: replay only) | 3000 | 58.0% [48.2, 67.2] |
 
-Fine-tuning (SmolVLA, flow-matching loss, lr 5e-6, batch 16, 50% expert replay)
-and paired closed-loop evaluation are running; results will be appended here.
+* base vs `ft_all`: +4.0pp, exact McNemar p = 0.48 (n.s.)
+* base vs `ft_replay`: +3.0pp, p = 0.65 (n.s.)
+* **`ft_all` vs `ft_replay`: −1.0pp, 12 win / 13 loss, p = 1.0**
+
+Fine-tuning perturbs the policy slightly (both runs lose ~3-4pp, not
+significant); the imagined corrections add **no measurable benefit** over a
+replay-only control trained with the same budget. Training-side evidence for
+the correction data:
+
+* synthetic (correction) loss falls from 3.85 to ~0.55 over 3000 steps,
+  replay loss stays at ~0.04 — the policy *does* learn the corrections
+* but what it learns is not worth more than random equal-budget perturbations
+  (W2), which is why closed-loop success does not move.
+
+Dataset filters built from the same corrections (in `runs/main`):
+`all` 360 / `gained` (WM score) / `lifted` (simulator-verified).
+
+## Bottom line
+
+For a strong VLA on LIBERO-Spatial, neither *selecting* among imagined
+candidates (previous work) nor *training on* imagined corrections (this work)
+turns world-model imagination into actionable value:
+
+1. Corrections help only slightly, and **only as much as a random perturbation
+   of the same magnitude** — the model's direction is not where the value is.
+2. Any benefit concentrates at episode starts (+15pp) and vanishes late.
+3. Offline imagined progress is a weak predictor of real gain (corr +0.09).
+4. Fine-tuning on the corrections matches, but does not beat, a replay-only
+   control.
+
+## Caveats
+
+* One suite, one base policy, one fine-tuning run per condition; all claims
+  are bounded by the reported intervals, and the state-level tests are paired
+  but clustered (episode-level summary included).
+* The world model is small (3.75M params) and trained on expert frames; larger
+  video world models are out of scope here.
+* The `0.5σ` trust region is a design choice; the budget sweep (W2b) exists to
+  make the sensitivity to that choice explicit.
